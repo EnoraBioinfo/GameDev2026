@@ -23,22 +23,26 @@ public class GrilleVisuel : MonoBehaviour
         {
             for (int y = 0; y < definition.largeur; y++)
             {
-                var position = new GrillePosition(x, y);
+                GrillePosition position = new GrillePosition(x, y);
 
-                Vector3 mondePosition =
-                    GrilleEnMonde(position);
+                Vector3 positionMonde = GrilleVersMonde(position);
 
-                Instantiate(
+                GameObject cellule = Instantiate(
                     cellulePrefab,
-                    mondePosition,
+                    positionMonde,
                     Quaternion.identity,
                     transform
                 );
+
+                GrilleCelluleVisuel celluleVisuel =
+                    cellule.GetComponent<GrilleCelluleVisuel>();
+
+                celluleVisuel.Initialiser(position);
             }
         }
     }
 
-    private Vector3 GrilleEnMonde(GrillePosition position)
+    private Vector3 GrilleVersMonde(GrillePosition position)
     {
         return new Vector3(
             position.x * definition.tailleCelluleGrille,
