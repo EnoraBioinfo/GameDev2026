@@ -38,13 +38,25 @@ public class GrilleSysteme
         return cellules.ContainsKey(position);
     }
 
-    public GrilleCellule GetCell(GrillePosition position)
+    public GrilleCellule ObtenirCellule(GrillePosition position)
     {
-        if (!cellules.TryGetValue(position, out var cell))
+        if (!cellules.TryGetValue(position, out var cellule))
         {
             return null;
         }
 
-        return cell;
+        return cellule;
+    }
+
+    public bool EstTraversable(GrillePosition position)
+    {
+        GrilleCellule cellule = ObtenirCellule(position);
+
+        if(cellule == null)
+        {
+            return false;
+        }
+
+        return cellule.EstTraversable;
     }
 }

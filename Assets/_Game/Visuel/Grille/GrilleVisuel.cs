@@ -10,9 +10,11 @@ public class GrilleVisuel : MonoBehaviour
 
     private GrilleSysteme grille;
 
+    public GrilleSysteme Grille => grille;
+
     private void Awake()
     {
-        grille = new GrilleSysteme(definition);
+        this.grille = new GrilleSysteme(definition);
 
         CreerVisuelGrille();
     }

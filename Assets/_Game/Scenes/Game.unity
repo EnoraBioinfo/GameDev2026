@@ -119,6 +119,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &57926272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 57926274}
+  - component: {fileID: 57926273}
+  m_Layer: 0
+  m_Name: GestionnaireJoueur
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &57926273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57926272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c66156dd40190034498d054b66c11da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GestionnaireJoueur
+  joueurPrefab: {fileID: 4574164417752657849, guid: 1f2ee8bc4af27be4885eb90c269b4868, type: 3}
+  grilleVisuel: {fileID: 1061427901}
+--- !u!4 &57926274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57926272}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.79557, y: 1.12894, z: 8.03706}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &738953587
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectionGrille
   cameraPrincipale: {fileID: 738953589}
+  gestionnaireJoueur: {fileID: 57926273}
 --- !u!4 &1830000672
 Transform:
   m_ObjectHideFlags: 0
@@ -482,3 +529,4 @@ SceneRoots:
   - {fileID: 891636698}
   - {fileID: 1061427902}
   - {fileID: 1830000672}
+  - {fileID: 57926274}

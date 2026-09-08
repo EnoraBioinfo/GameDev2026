@@ -6,6 +6,9 @@ public class SelectionGrille : MonoBehaviour
     [SerializeField]
     private Camera cameraPrincipale;
 
+    [SerializeField]
+    private GestionnaireJoueur gestionnaireJoueur;
+
     private GrilleCelluleVisuel celluleSelectionnee;
 
     private void Update()
@@ -44,6 +47,8 @@ public class SelectionGrille : MonoBehaviour
         celluleSelectionnee = cellule;
 
         celluleSelectionnee.Selectionner();
+
+        gestionnaireJoueur.DeplacerVers(celluleSelectionnee.Position);
 
         Debug.Log(
             $"Cellule sélectionnée : {celluleSelectionnee.Position}"
