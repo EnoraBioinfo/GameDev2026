@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3916369250748522285}
   - component: {fileID: 618337113691622703}
   - component: {fileID: 6218675655859656924}
+  - component: {fileID: -2474524203601824983}
   m_Layer: 0
   m_Name: Cellule
   m_TagString: Untagged
@@ -112,3 +113,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-2474524203601824983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405479372722674600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f66e10a6d4d70914ca7ff427109e612b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrilleCelluleVisuel
+  rendu: {fileID: 618337113691622703}
+  materiauNormal: {fileID: 2100000, guid: 7e48c3db1b6221541af8e70c16cd2537, type: 2}
+  materiauSelectionne: {fileID: 2100000, guid: 75c36f679c6ec5f40af860eb8c62626a, type: 2}
