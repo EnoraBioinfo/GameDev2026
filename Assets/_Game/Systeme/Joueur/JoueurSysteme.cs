@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class JoueurSysteme
+public class JoueurSysteme : IGrilleOccupant
 {
     private readonly GrilleSysteme grille;
     public GrillePosition Position { get; private set; }
@@ -9,6 +9,11 @@ public class JoueurSysteme
     {
         this.grille = grille;
         Position = positionInitiale;
+    }
+
+    public void DefinirPosition(GrillePosition position)
+    {
+        Position = position;
     }
 
     public bool PeutSeDeplacerVers(GrillePosition nouvellePosition)
@@ -38,8 +43,6 @@ public class JoueurSysteme
             return false;
         }
 
-        Position = nouvellePosition;
-
-        return true;
+        return grille.DeplacerOccupant(this, nouvellePosition );
     }
 }

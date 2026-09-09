@@ -8,6 +8,9 @@ public class GrilleVisuel : MonoBehaviour
     [SerializeField]
     private GameObject cellulePrefab;
 
+    [SerializeField]
+    private GameObject obstaclePrefab;
+
     private GrilleSysteme grille;
 
     public GrilleSysteme Grille => grille;
@@ -36,8 +39,7 @@ public class GrilleVisuel : MonoBehaviour
                     transform
                 );
 
-                GrilleCelluleVisuel celluleVisuel =
-                    cellule.GetComponent<GrilleCelluleVisuel>();
+                GrilleCelluleVisuel celluleVisuel = cellule.GetComponent<GrilleCelluleVisuel>();
 
                 celluleVisuel.Initialiser(position);
             }
@@ -50,6 +52,54 @@ public class GrilleVisuel : MonoBehaviour
             position.x * definition.tailleCelluleGrille,
             0f,
             position.y * definition.tailleCelluleGrille
+        );
+    }
+
+    public void AfficherCelluleBloquee(GrillePosition position)
+    {
+        GrilleCelluleVisuel celluleVisuel = TrouverCelluleVisuelle(position);
+
+        if (celluleVisuel == null)
+        {
+            return;
+        }
+
+        celluleVisuel.DefinirBloquee();
+
+        CreerObstacle(position);
+    }
+
+    private GrilleCelluleVisuel TrouverCelluleVisuelle(GrillePosition position)
+    {
+        GrilleCelluleVisuel[] cellules = GetComponentsInChildren<GrilleCelluleVisuel>();
+
+        foreach (GrilleCelluleVisuel cellule in cellules)
+        {
+            if (cellule.Position == position)
+            {
+                return cellule;
+            }
+        }
+
+        return null;
+    }
+
+    private void CreerObstacle(GrillePosition position)
+    {
+        if (obstaclePrefab == null)
+        {
+            return;
+        }
+
+        Vector3 positionMonde = GrilleVersMonde(position);
+
+        positionMonde.y = 0.5f;
+
+        Instantiate(
+            obstaclePrefab,
+            positionMonde,
+            Quaternion.identity,
+            transform
         );
     }
 }

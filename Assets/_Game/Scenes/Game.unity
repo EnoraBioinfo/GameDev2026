@@ -165,6 +165,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &602315018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 602315020}
+  - component: {fileID: 602315019}
+  m_Layer: 0
+  m_Name: TestObstaclesGrille
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &602315019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602315018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bcd8012b6fb18b419a59fc7a18588b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestObstaclesGrille
+  grilleVisuel: {fileID: 1061427901}
+--- !u!4 &602315020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602315018}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.98611, y: 4.5181, z: 2.3063}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &738953587
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,13 +296,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738953587}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 5, y: 10, z: -5}
+  m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
+  m_LocalPosition: {x: -2.5, y: 10, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
 --- !u!114 &738953591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,6 +505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GrilleVisuel
   definition: {fileID: 11400000, guid: d702fbb6105d62f49bdbbcd73cb3f800, type: 2}
   cellulePrefab: {fileID: 405479372722674600, guid: 6056aaab2409a9344896e93619c1c68a, type: 3}
+  obstaclePrefab: {fileID: 4555461695177849309, guid: a5f4a7b82c9bf22439d998ce13b49dad, type: 3}
 --- !u!4 &1061427902
 Transform:
   m_ObjectHideFlags: 0
@@ -530,3 +576,4 @@ SceneRoots:
   - {fileID: 1061427902}
   - {fileID: 1830000672}
   - {fileID: 57926274}
+  - {fileID: 602315020}

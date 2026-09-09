@@ -17,6 +17,8 @@ public class GestionnaireJoueur : MonoBehaviour
 
         joueurSysteme = new JoueurSysteme(grilleVisuel.Grille, positionInitiale);
 
+        grilleVisuel.Grille.PlacerOccupant(joueurSysteme, positionInitiale);
+
         CreerJoueurVisuel();
     }
 

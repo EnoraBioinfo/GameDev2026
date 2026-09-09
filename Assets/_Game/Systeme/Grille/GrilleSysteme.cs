@@ -59,4 +59,82 @@ public class GrilleSysteme
 
         return cellule.EstTraversable;
     }
+
+    public void DefinirCelluleTraversable(GrillePosition position, bool estTraversable)
+    {
+        GrilleCellule cellule = ObtenirCellule(position);
+
+        if (cellule == null)
+        {
+            return;
+        }
+
+        cellule.DefinirSiTraversable(estTraversable);
+    }
+
+    public IEnumerable<GrilleCellule> ObtenirToutesLesCellules()
+    {
+        return cellules.Values;
+    }
+
+    public bool PlacerOccupant(IGrilleOccupant occupant, GrillePosition position)
+    {
+        GrilleCellule cellule = ObtenirCellule(position);
+
+        if (cellule == null)
+        {
+            return false;
+        }
+
+        if (!cellule.PlacerOccupant(occupant))
+        {
+            return false;
+        }
+
+        occupant.DefinirPosition(position);
+
+        return true;
+    }
+
+    public void RetirerOccupant(GrillePosition position)
+    {
+        GrilleCellule cellule = ObtenirCellule(position);
+
+        if (cellule == null)
+        {
+            return;
+        }
+
+        cellule.RetirerOccupant();
+    }
+
+    public bool DeplacerOccupant(IGrilleOccupant occupant, GrillePosition nouvellePosition)
+    {
+        GrilleCellule nouvelleCellule = ObtenirCellule(nouvellePosition);
+
+        if (nouvelleCellule == null)
+        {
+            return false;
+        }
+
+        if (!nouvelleCellule.PeutEtreOccupee())
+        {
+            return false;
+        }
+
+        GrilleCellule ancienneCellule = ObtenirCellule(occupant.Position);
+
+        if (ancienneCellule == null)
+        {
+            return false;
+        }
+
+        ancienneCellule.RetirerOccupant();
+
+        nouvelleCellule.PlacerOccupant(occupant);
+
+        occupant.DefinirPosition(nouvellePosition);
+
+        return true;
+    }
 }

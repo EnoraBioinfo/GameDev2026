@@ -13,6 +13,9 @@ public class GrilleCelluleVisuel : MonoBehaviour
     [SerializeField]
     private Material materiauSelectionne;
 
+    [SerializeField]
+    private Material materiauBloque;
+
     public void Initialiser(GrillePosition position)
     {
         Position = position;
@@ -33,6 +36,14 @@ public class GrilleCelluleVisuel : MonoBehaviour
         if (rendu != null && materiauNormal != null)
         {
             rendu.material = materiauNormal;
+        }
+    }
+
+    public void DefinirBloquee()
+    {
+        if (rendu != null && materiauBloque != null)
+        {
+            rendu.material = materiauBloque;
         }
     }
 }
