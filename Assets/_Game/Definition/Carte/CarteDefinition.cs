@@ -1,16 +1,24 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class CarteDefinition : MonoBehaviour
+[CreateAssetMenu(
+    fileName = "CarteDefinition",
+    menuName = "Jeu/Cartes/Définition de carte"
+)]
+public class CarteDefinition : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [Header("Informations")]
+    public string nom;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [TextArea]
+    public string description;
+
+    public RareteCarte rarete;
+
+    [Header("Evolution")]
+    [Min(1)]
+    public int niveauMaximum = 3;
+
+    [Header("Effets")]
+    public List<EffetCarteDefinition> effets = new List<EffetCarteDefinition>();
 }
