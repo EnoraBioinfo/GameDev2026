@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: JoueurBase
   m_EditorClassIdentifier: Assembly-CSharp::JoueurDefinition
   pointsMouvementMaximum: 3
+  nombreSegmentsAction: 2

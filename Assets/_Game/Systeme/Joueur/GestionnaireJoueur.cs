@@ -14,8 +14,11 @@ public class GestionnaireJoueur : MonoBehaviour
     private JoueurSysteme joueurSysteme;
     private JoueurVisuel joueurVisuel;
     private SegmentActionJoueur segmentActionActuel;
+    private int nombreSegmentsUtilises;
 
-    private void Start()
+    public int NombreSegmentsAction => joueurDefinition.nombreSegmentsAction;
+
+    public void Initialiser()
     {
         GrillePosition positionInitiale = new GrillePosition(0, 0);
 
@@ -28,9 +31,7 @@ public class GestionnaireJoueur : MonoBehaviour
 
     private void CreerJoueurVisuel()
     {
-        GameObject joueurObjet = Instantiate(
-            joueurPrefab
-        );
+        GameObject joueurObjet = Instantiate(joueurPrefab);
 
         joueurVisuel =
             joueurObjet.GetComponent<JoueurVisuel>();
@@ -38,8 +39,16 @@ public class GestionnaireJoueur : MonoBehaviour
         joueurVisuel.Initialiser(joueurSysteme);
     }
 
+    public void CommencerTour()
+    {
+        nombreSegmentsUtilises = 0;
+        segmentActionActuel = null;
+    }
+
     public void DeplacerVers(GrillePosition position)
     {
+        Debug.Log($"Peut déplacer : {PeutFaireAction(TypeActionJoueur.Deplacement)}");
+
         if (!PeutFaireAction(TypeActionJoueur.Deplacement))
         {
             return;
@@ -64,11 +73,36 @@ public class GestionnaireJoueur : MonoBehaviour
         Debug.Log($"Points de mouvement restaurés : {joueurSysteme.PointsMouvement}");
     }
 
-    public void CommencerSegment(TypeActionJoueur typeAction)
+    public bool PeutCommencerUnSegment()
     {
+        if (segmentActionActuel != null)
+        {
+            return false;
+        }
+
+        return nombreSegmentsUtilises < NombreSegmentsAction;
+    }
+
+    public bool CommencerSegment(TypeActionJoueur typeAction)
+    {
+        if (!PeutCommencerUnSegment())
+        {
+            return false;
+        }
+
+        nombreSegmentsUtilises++;
         segmentActionActuel = new SegmentActionJoueur(typeAction);
 
-        Debug.Log($"Segment joueur commencé : {typeAction}");
+        Debug.Log($"Segment {nombreSegmentsUtilises} commencé : {typeAction}");
+
+        return true;
+    }
+
+    public void TerminerSegment()
+    {
+        Debug.Log($"Segment {nombreSegmentsUtilises} terminé");
+
+        segmentActionActuel = null;
     }
 
     public bool PeutFaireAction(TypeActionJoueur typeAction)
@@ -79,5 +113,10 @@ public class GestionnaireJoueur : MonoBehaviour
         }
 
         return segmentActionActuel.Type == typeAction;
+    }
+
+    public bool PossedeEncoreUnSegment()
+    {
+        return nombreSegmentsUtilises < NombreSegmentsAction;
     }
 }

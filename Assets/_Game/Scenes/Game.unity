@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GestionnaireJoueur
   joueurPrefab: {fileID: 4574164417752657849, guid: 1f2ee8bc4af27be4885eb90c269b4868, type: 3}
   grilleVisuel: {fileID: 1061427901}
-  joueurDefinition: {fileID: 0}
+  joueurDefinition: {fileID: 11400000, guid: 0ce53f4200064b74d95b230f10b86656, type: 2}
 --- !u!4 &57926274
 Transform:
   m_ObjectHideFlags: 0

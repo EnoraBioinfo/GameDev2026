@@ -17,6 +17,7 @@ public class GestionnaireTours : MonoBehaviour
 
     private void Start()
     {
+        gestionnaireJoueur.Initialiser();
         CommencerTourJoueur();
     }
 
@@ -25,7 +26,19 @@ public class GestionnaireTours : MonoBehaviour
         if (Keyboard.current != null &&
             Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            TerminerTourJoueur();
+            TerminerSegmentJoueur();
+        }
+
+        if (Keyboard.current != null &&
+            Keyboard.current.dKey.wasPressedThisFrame)
+        {
+            ChoisirActionJoueur(TypeActionJoueur.Deplacement);
+        }
+
+        if (Keyboard.current != null &&
+            Keyboard.current.cKey.wasPressedThisFrame)
+        {
+            ChoisirActionJoueur(TypeActionJoueur.Cartes);
         }
     }
 
@@ -33,8 +46,8 @@ public class GestionnaireTours : MonoBehaviour
     {
         TourActuel = TypeTour.Joueur;
 
+        gestionnaireJoueur.CommencerTour();
         gestionnaireJoueur.RestaurerPointsMouvement();
-        gestionnaireJoueur.CommencerSegment(TypeActionJoueur.Deplacement);
 
         Debug.Log("Tour du joueur");
     }
@@ -64,5 +77,35 @@ public class GestionnaireTours : MonoBehaviour
         Debug.Log("Fin du tour du joueur");
 
         CommencerTourEnnemis();
+    }
+
+    public void ChoisirActionJoueur(TypeActionJoueur typeAction)
+    {
+        if (TourActuel != TypeTour.Joueur)
+        {
+            return;
+        }
+
+        bool segmentCommence = gestionnaireJoueur.CommencerSegment(typeAction);
+
+        if (!segmentCommence)
+        {
+            Debug.Log("Aucun segment supplémentaire disponible.");
+        }
+    }
+
+    public void TerminerSegmentJoueur()
+    {
+        if (TourActuel != TypeTour.Joueur)
+        {
+            return;
+        }
+
+        gestionnaireJoueur.TerminerSegment();
+
+        if (!gestionnaireJoueur.PossedeEncoreUnSegment())
+        {
+            TerminerTourJoueur();
+        }
     }
 }
