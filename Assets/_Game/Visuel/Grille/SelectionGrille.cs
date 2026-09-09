@@ -9,6 +9,9 @@ public class SelectionGrille : MonoBehaviour
     [SerializeField]
     private GestionnaireJoueur gestionnaireJoueur;
 
+    [SerializeField]
+    private GestionnaireTours gestionnaireTours;
+
     private GrilleCelluleVisuel celluleSelectionnee;
 
     private void Update()
@@ -22,13 +25,16 @@ public class SelectionGrille : MonoBehaviour
 
     private void DetecterCellule(Vector2 positionEcran)
     {
-        Ray rayon =
-            cameraPrincipale.ScreenPointToRay(positionEcran);
+        if (gestionnaireTours.TourActuel != GestionnaireTours.TypeTour.Joueur)
+        {
+            return;
+        }
+
+        Ray rayon = cameraPrincipale.ScreenPointToRay(positionEcran);
 
         if (Physics.Raycast(rayon, out RaycastHit touche))
         {
-            GrilleCelluleVisuel cellule =
-                touche.collider.GetComponent<GrilleCelluleVisuel>();
+            GrilleCelluleVisuel cellule = touche.collider.GetComponent<GrilleCelluleVisuel>();
 
             if (cellule != null)
             {

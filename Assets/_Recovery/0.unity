@@ -150,7 +150,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GestionnaireJoueur
   joueurPrefab: {fileID: 4574164417752657849, guid: 1f2ee8bc4af27be4885eb90c269b4868, type: 3}
   grilleVisuel: {fileID: 1061427901}
-  joueurDefinition: {fileID: 0}
 --- !u!4 &57926274
 Transform:
   m_ObjectHideFlags: 0
@@ -197,7 +196,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &522162628
+--- !u!1 &534471529
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,36 +204,21 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 522162630}
-  - component: {fileID: 522162629}
+  - component: {fileID: 534471530}
   m_Layer: 0
-  m_Name: GestionnaireEnnemi
+  m_Name: ====TOURS ====
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &522162629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522162628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 576c83e14f01b004fb2f62dc8cc2af22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GestionnaireEnnemi
-  ennemiPrefab: {fileID: 6732148471514055863, guid: c3ce41d4d85e6d949b8f57a0a30d7199, type: 3}
-  grilleVisuel: {fileID: 1061427901}
---- !u!4 &522162630
+--- !u!4 &534471530
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522162628}
+  m_GameObject: {fileID: 534471529}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.36966, y: 0.23998, z: 7.21528}
@@ -425,51 +409,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!1 &782949434
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 782949436}
-  - component: {fileID: 782949435}
-  m_Layer: 0
-  m_Name: GestionnaireTours
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &782949435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782949434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22ffbd6bb1acaff4a83e2f7e47425b50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GestionnaireTours
-  gestionnaireJoueur: {fileID: 57926273}
---- !u!4 &782949436
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782949434}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.36966, y: 0.23998, z: 7.21528}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &891636696
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,7 +547,7 @@ GameObject:
   - component: {fileID: 1061427902}
   - component: {fileID: 1061427901}
   m_Layer: 0
-  m_Name: GrilleVisuel
+  m_Name: Grille
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -644,7 +583,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1108870988
+--- !u!1 &1329193800
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -652,24 +591,83 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1108870989}
+  - component: {fileID: 1329193802}
+  - component: {fileID: 1329193801}
   m_Layer: 0
-  m_Name: ==== TOURS ====
+  m_Name: GestionnaireTours
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1108870989
+--- !u!114 &1329193801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329193800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ffbd6bb1acaff4a83e2f7e47425b50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GestionnaireTours
+--- !u!4 &1329193802
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108870988}
+  m_GameObject: {fileID: 1329193800}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.36966, y: 0.23998, z: 7.21528}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1711091952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1711091954}
+  - component: {fileID: 1711091953}
+  m_Layer: 0
+  m_Name: GestionnaireEnnemi
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1711091953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711091952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576c83e14f01b004fb2f62dc8cc2af22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GestionnaireEnnemi
+  ennemiPrefab: {fileID: 6732148471514055863, guid: c3ce41d4d85e6d949b8f57a0a30d7199, type: 3}
+  grilleVisuel: {fileID: 1061427901}
+--- !u!4 &1711091954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711091952}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.0471, y: 0.95728, z: 6.59446}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -686,7 +684,7 @@ GameObject:
   - component: {fileID: 1830000672}
   - component: {fileID: 1830000671}
   m_Layer: 0
-  m_Name: SelectionGrille
+  m_Name: GestionnaireGrille
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -706,7 +704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SelectionGrille
   cameraPrincipale: {fileID: 738953589}
   gestionnaireJoueur: {fileID: 57926273}
-  gestionnaireTours: {fileID: 782949435}
+  gestionnaireTours: {fileID: 0}
 --- !u!4 &1830000672
 Transform:
   m_ObjectHideFlags: 0
@@ -797,6 +795,6 @@ SceneRoots:
   - {fileID: 1890173385}
   - {fileID: 57926274}
   - {fileID: 602315020}
-  - {fileID: 522162630}
-  - {fileID: 1108870989}
-  - {fileID: 782949436}
+  - {fileID: 1711091954}
+  - {fileID: 534471530}
+  - {fileID: 1329193802}

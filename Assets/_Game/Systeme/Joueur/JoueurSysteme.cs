@@ -5,10 +5,16 @@ public class JoueurSysteme : IGrilleOccupant
     private readonly GrilleSysteme grille;
     public GrillePosition Position { get; private set; }
 
-    public JoueurSysteme(GrilleSysteme grille, GrillePosition positionInitiale)
+    private readonly JoueurDefinition joueurDefinition;
+
+    public int PointsMouvement { get; private set; }
+
+    public JoueurSysteme(GrilleSysteme grille, JoueurDefinition joueurDefinition, GrillePosition positionInitiale)
     {
         this.grille = grille;
+        this.joueurDefinition = joueurDefinition;
         Position = positionInitiale;
+        PointsMouvement = joueurDefinition.pointsMouvementMaximum;
     }
 
     public void DefinirPosition(GrillePosition position)
@@ -43,6 +49,25 @@ public class JoueurSysteme : IGrilleOccupant
             return false;
         }
 
-        return grille.DeplacerOccupant(this, nouvellePosition );
+        if (PointsMouvement <= 0)
+        {
+            return false;
+        }
+
+        bool deplacementReussi = grille.DeplacerOccupant(this, nouvellePosition);
+
+        if (!deplacementReussi)
+        {
+            return false;
+        }
+
+        PointsMouvement--;
+
+        return true;
+    }
+
+    public void RestaurerPointsMouvement()
+    {
+        PointsMouvement = joueurDefinition.pointsMouvementMaximum;
     }
 }
