@@ -4,26 +4,46 @@ using System.Linq;
 public class DeckJoueur
 {
     private readonly List<CarteInstance> cartes;
-    private readonly int nombreMaximumMemeCarte;
+    private readonly ReglesDeck reglesDeck;
+    public string Nom { get; private set; }
 
     public IReadOnlyList<CarteInstance> Cartes => cartes;
 
-    public DeckJoueur(int nombreMaximumMemeCarte)
+    public DeckJoueur(ReglesDeck reglesDeck, string nom)
     {
         cartes = new List<CarteInstance>();
-        this.nombreMaximumMemeCarte = nombreMaximumMemeCarte;
+        this.reglesDeck = reglesDeck;
+        Nom = nom;
+    }
+
+    public void Renommer(string nouveauNom)
+    {
+        if (string.IsNullOrWhiteSpace(nouveauNom))
+        {
+            return;
+        }
+
+        Nom = nouveauNom;
     }
 
     public bool PeutAjouterCarte(CarteInstance carte)
     {
-        if (carte == null)
+        if (reglesDeck == null || carte == null)
         {
             return false;
         }
 
-        int nombreDejaPresent = ObtenirNombreCartes(carte.Definition);
+        if (cartes.Contains(carte))
+        {
+            return false;
+        }
 
-        return nombreDejaPresent < nombreMaximumMemeCarte;
+        if (ObtenirNombreCartes() >= reglesDeck.nombreMaximumCartes)
+        {
+            return false;
+        }
+
+        return ObtenirNombreCartes(carte.Definition) < reglesDeck.nombreMaximumMemeCarte;
     }
 
     public bool AjouterCarte(CarteInstance carte)
@@ -56,5 +76,16 @@ public class DeckJoueur
     public int ObtenirNombreCartes(CarteDefinition definition)
     {
         return cartes.Count(carte => carte.Definition == definition);
+    }
+
+    public bool EstValide()
+    {
+        if (reglesDeck == null)
+        {
+            return false;
+        }
+
+        return cartes.Count >= reglesDeck.nombreMinimumCartes &&
+               cartes.Count <= reglesDeck.nombreMaximumCartes;
     }
 }

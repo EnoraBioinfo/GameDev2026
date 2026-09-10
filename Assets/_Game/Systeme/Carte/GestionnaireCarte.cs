@@ -4,20 +4,27 @@ using UnityEngine;
 public class GestionnaireCartes : MonoBehaviour
 {
     [SerializeField]
-    private int nombreMaximumMemeCarteDansDeck = 3;
+    private ReglesDeck reglesDeck;
+
+    [SerializeField]
+    private int nombreDecks = 3;
+
+    [SerializeField]
+    private ReglesFusionCartes reglesFusion;
 
     private CollectionCartes collection;
-    private DeckJoueur deck;
+    private GestionnaireDecks gestionnaireDecks;
+    private SystemeFusionCartes systemeFusionCartes;
 
     public CollectionCartes Collection => collection;
-    public DeckJoueur Deck => deck;
-    private SystemeFusionCartes systemeFusionCartes;
+    public GestionnaireDecks GestionnaireDecks => gestionnaireDecks;
+    public DeckJoueur DeckSelectionne => gestionnaireDecks?.DeckSelectionne;
 
     public void Initialiser()
     {
         collection = new CollectionCartes();
-        deck = new DeckJoueur(nombreMaximumMemeCarteDansDeck);
-        systemeFusionCartes = new SystemeFusionCartes();
+        gestionnaireDecks = new GestionnaireDecks(reglesDeck, nombreDecks);
+        systemeFusionCartes = new SystemeFusionCartes(reglesFusion);
 
         Debug.Log("Gestionnaire de cartes initialisé.");
     }
@@ -44,6 +51,18 @@ public class GestionnaireCartes : MonoBehaviour
 
     public bool AjouterCarteAuDeck(CarteInstance carte)
     {
+        if (gestionnaireDecks == null || carte == null)
+        {
+            return false;
+        }
+
+        if (!collection.ContientCarte(carte))
+        {
+            return false;
+        }
+
+        DeckJoueur deck = gestionnaireDecks.DeckSelectionne;
+
         if (deck == null)
         {
             return false;
@@ -54,12 +73,29 @@ public class GestionnaireCartes : MonoBehaviour
 
     public bool RetirerCarteDuDeck(CarteInstance carte)
     {
+        if (gestionnaireDecks == null)
+        {
+            return false;
+        }
+
+        DeckJoueur deck = gestionnaireDecks.DeckSelectionne;
+
         if (deck == null)
         {
             return false;
         }
 
         return deck.RetirerCarte(carte);
+    }
+
+    public bool SelectionnerDeck(int index)
+    {
+        if (gestionnaireDecks == null)
+        {
+            return false;
+        }
+
+        return gestionnaireDecks.SelectionnerDeck(index);
     }
 
     public CarteInstance FusionnerCartes(List<CarteInstance> cartes)

@@ -57,4 +57,9 @@ public class CollectionCartes
                 carte.Niveau == niveau)
             .ToList();
     }
+
+    public bool ContientCarte(CarteInstance carte)
+    {
+        return cartes.Contains(carte);
+    }
 }

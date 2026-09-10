@@ -781,7 +781,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d720f99792ebb4a4390facb78415d55d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GestionnaireCartes
-  nombreMaximumMemeCarteDansDeck: 3
+  reglesDeck: {fileID: 11400000, guid: b8b4d0385b53fd64aa8dc46414d18f58, type: 2}
+  nombreDecks: 3
+  reglesFusion: {fileID: 11400000, guid: fe275abaff65bfe42bf7a80cf777de49, type: 2}
 --- !u!4 &1568656115
 Transform:
   m_ObjectHideFlags: 0
