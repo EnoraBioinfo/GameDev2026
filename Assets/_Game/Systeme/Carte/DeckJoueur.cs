@@ -4,12 +4,12 @@ using System.Linq;
 public class DeckJoueur
 {
     private readonly List<CarteInstance> cartes;
-    private readonly ReglesDeck reglesDeck;
+    private readonly ReglesDeckScriptable reglesDeck;
     public string Nom { get; private set; }
 
     public IReadOnlyList<CarteInstance> Cartes => cartes;
 
-    public DeckJoueur(ReglesDeck reglesDeck, string nom)
+    public DeckJoueur(ReglesDeckScriptable reglesDeck, string nom)
     {
         cartes = new List<CarteInstance>();
         this.reglesDeck = reglesDeck;
@@ -73,7 +73,7 @@ public class DeckJoueur
         return cartes.Count;
     }
 
-    public int ObtenirNombreCartes(CarteDefinition definition)
+    public int ObtenirNombreCartes(CarteDefinitionScriptable definition)
     {
         return cartes.Count(carte => carte.Definition == definition);
     }

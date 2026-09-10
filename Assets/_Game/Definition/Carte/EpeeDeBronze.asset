@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a48ee1263254241b585837ea89b73e, type: 3}
   m_Name: EpeeDeBronze
   m_EditorClassIdentifier: Assembly-CSharp::CarteDefinition
+  identifiant: epee_de_bronze
   nom: "Ep\xE9e de Bronze"
   description: "Une \xE9p\xE9e un peu nulle mais qui reste mieux que de taper avec
     ses bras"

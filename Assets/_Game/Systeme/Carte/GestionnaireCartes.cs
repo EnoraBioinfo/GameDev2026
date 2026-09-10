@@ -4,13 +4,13 @@ using UnityEngine;
 public class GestionnaireCartes : MonoBehaviour
 {
     [SerializeField]
-    private ReglesDeck reglesDeck;
+    private ReglesDeckScriptable reglesDeck;
 
     [SerializeField]
     private int nombreDecks = 3;
 
     [SerializeField]
-    private ReglesFusionCartes reglesFusion;
+    private ReglesFusionCartesScriptable reglesFusion;
 
     private CollectionCartes collection;
     private GestionnaireDecks gestionnaireDecks;
@@ -29,7 +29,34 @@ public class GestionnaireCartes : MonoBehaviour
         Debug.Log("Gestionnaire de cartes initialisé.");
     }
 
-    public bool AjouterCarte(CarteDefinition definition, int niveau)
+    public CarteInstance AjouterCarteAvecIdentifiant(string identifiant, CarteDefinitionScriptable definition, int niveau)
+    {
+        if (definition == null)
+        {
+            return null;
+        }
+
+        if (string.IsNullOrEmpty(identifiant))
+        {
+            return null;
+        }
+
+        if (niveau < 1 || niveau > definition.niveauMaximum)
+        {
+            return null;
+        }
+
+        CarteInstance carte = new CarteInstance(
+            identifiant,
+            definition,
+            niveau);
+
+        collection.AjouterCarte(carte);
+
+        return carte;
+    }
+
+    public bool AjouterCarte(CarteDefinitionScriptable definition, int niveau)
     {
         if (definition == null)
         {

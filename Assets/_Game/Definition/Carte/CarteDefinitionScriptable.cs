@@ -5,14 +5,18 @@ using UnityEngine;
     fileName = "CarteDefinition",
     menuName = "Jeu/Cartes/Définition de carte"
 )]
-public class CarteDefinition : ScriptableObject
+public class CarteDefinitionScriptable : ScriptableObject
 {
+    [Header("Identification")]
+    public string identifiant;
+
     [Header("Informations")]
     public string nom;
 
     [TextArea]
     public string description;
 
+    [Header("Rareté")]
     public RareteCarte rarete;
 
     [Header("Evolution")]

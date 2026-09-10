@@ -37,19 +37,29 @@ public class CollectionCartes
         return cartes.Count;
     }
 
-    public List<CarteInstance> ObtenirCartes(CarteDefinition definition)
+    public List<CarteInstance> ObtenirCartes(CarteDefinitionScriptable definition)
     {
         return cartes
             .Where(carte => carte.Definition == definition)
             .ToList();
     }
 
-    public int ObtenirNombreCartes(CarteDefinition definition)
+    public CarteInstance ObtenirCarte(string identifiant)
+    {
+        if (string.IsNullOrEmpty(identifiant))
+        {
+            return null;
+        }
+
+        return cartes.FirstOrDefault(carte => carte.Identifiant == identifiant);
+    }
+
+    public int ObtenirNombreCartes(CarteDefinitionScriptable definition)
     {
         return cartes.Count(carte => carte.Definition == definition);
     }
 
-    public List<CarteInstance> ObtenirCartesDeNiveau(CarteDefinition definition, int niveau)
+    public List<CarteInstance> ObtenirCartesDeNiveau(CarteDefinitionScriptable definition, int niveau)
     {
         return cartes
             .Where(carte =>

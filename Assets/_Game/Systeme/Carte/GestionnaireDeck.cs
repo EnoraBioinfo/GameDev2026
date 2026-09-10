@@ -3,14 +3,15 @@ using System.Collections.Generic;
 public class GestionnaireDecks
 {
     private readonly List<DeckJoueur> decks;
-    private readonly ReglesDeck reglesDeck;
+    private readonly ReglesDeckScriptable reglesDeck;
 
     private int indexDeckSelectionne;
+    public int IndexDeckSelectionne => indexDeckSelectionne;
 
     public IReadOnlyList<DeckJoueur> Decks => decks;
     public DeckJoueur DeckSelectionne => ObtenirDeckSelectionne();
 
-    public GestionnaireDecks(ReglesDeck reglesDeck, int nombreDecks)
+    public GestionnaireDecks(ReglesDeckScriptable reglesDeck, int nombreDecks)
     {
         this.reglesDeck = reglesDeck;
         decks = new List<DeckJoueur>();
@@ -74,6 +75,11 @@ public class GestionnaireDecks
         return true;
     }
 
+    public DeckJoueur AjouterDeckAvecNom(string nom)
+    {
+        return CreerDeck(nom);
+    }
+
     public bool RenommerDeck(DeckJoueur deck, string nouveauNom)
     {
         if (deck == null)
@@ -126,5 +132,26 @@ public class GestionnaireDecks
     public int ObtenirNombreDecks()
     {
         return decks.Count;
+    }
+
+    public bool AjouterCarteAuDeck(DeckJoueur deck, CarteInstance carte)
+    {
+        if (deck == null || carte == null)
+        {
+            return false;
+        }
+
+        if (!decks.Contains(deck))
+        {
+            return false;
+        }
+
+        return deck.AjouterCarte(carte);
+    }
+
+    public void ViderDecks()
+    {
+        decks.Clear();
+        indexDeckSelectionne = 0;
     }
 }

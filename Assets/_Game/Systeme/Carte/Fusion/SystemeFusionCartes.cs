@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 public class SystemeFusionCartes
 {
-    private readonly ReglesFusionCartes reglesFusion;
+    private readonly ReglesFusionCartesScriptable reglesFusion;
 
-    public SystemeFusionCartes(ReglesFusionCartes reglesFusion)
+    public SystemeFusionCartes(ReglesFusionCartesScriptable reglesFusion)
     {
         this.reglesFusion = reglesFusion;
     }
@@ -28,7 +28,7 @@ public class SystemeFusionCartes
             return false;
         }
 
-        CarteDefinition definition = cartes[0].Definition;
+        CarteDefinitionScriptable definition = cartes[0].Definition;
         int pointsFusion = ObtenirPointsFusion(cartes);
 
         if (pointsFusion <= 0)
@@ -68,7 +68,7 @@ public class SystemeFusionCartes
             return null;
         }
 
-        CarteDefinition definition = cartes[0].Definition;
+        CarteDefinitionScriptable definition = cartes[0].Definition;
 
         foreach (CarteInstance carte in cartes)
         {
@@ -84,7 +84,7 @@ public class SystemeFusionCartes
 
     private bool ToutesLesCartesSontValides(List<CarteInstance> cartes)
     {
-        CarteDefinition definition = cartes[0]?.Definition;
+        CarteDefinitionScriptable definition = cartes[0]?.Definition;
 
         if (definition == null)
         {

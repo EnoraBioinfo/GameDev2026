@@ -5,7 +5,7 @@ using UnityEngine;
     fileName = "ReglesFusionCartes",
     menuName = "Jeu/Cartes/Règles de fusion"
 )]
-public class ReglesFusionCartes : ScriptableObject
+public class ReglesFusionCartesScriptable : ScriptableObject
 {
     [Header("Valeur de fusion par niveau")]
     public List<ValeurFusionCarte> valeursFusion = new List<ValeurFusionCarte>();

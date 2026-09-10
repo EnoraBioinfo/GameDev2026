@@ -1,16 +1,7 @@
-using UnityEngine;
-
-public class CarteSauvegarde : MonoBehaviour
+[System.Serializable]
+public class CarteSauvegarde
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string identifiant;
+    public string identifiantCarteDefinitionScriptable;
+    public int niveau;
 }

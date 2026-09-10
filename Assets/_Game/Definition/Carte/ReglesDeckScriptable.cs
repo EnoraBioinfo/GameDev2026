@@ -4,7 +4,7 @@ using UnityEngine;
     fileName = "ReglesDeck",
     menuName = "Jeu/Cartes/Règles de deck"
 )]
-public class ReglesDeck : ScriptableObject
+public class ReglesDeckScriptable : ScriptableObject
 {
     [Header("Taille du deck")]
     [Min(0)]

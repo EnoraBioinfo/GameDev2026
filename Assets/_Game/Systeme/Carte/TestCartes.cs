@@ -7,7 +7,7 @@ public class TestCartes : MonoBehaviour
     private GestionnaireCartes gestionnaireCartes;
 
     [SerializeField]
-    private CarteDefinition epeeDeBronze;
+    private CarteDefinitionScriptable epeeDeBronze;
 
     private void Start()
     {
