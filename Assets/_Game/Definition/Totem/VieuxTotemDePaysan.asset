@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a87be4744e5db4ca4b13e41f7e9fd7, type: 3}
+  m_Name: VieuxTotemDePaysan
+  m_EditorClassIdentifier: Assembly-CSharp::TotemDefinitionScriptable
+  identifiant: vieux_totem_de_paysan
+  nom: Vieux Totem de Paysan
+  prixDeVentePiece: 2
+  prixDeVenteDiamant: 0
+  description: "Une vieille relique qui appartenait \xE0 un paysan supersticieux.\nD'apr\xE8s lui elle lui procurait la force de faucher le plus dur des bl\xE9s."
+  rarete: 0
+  effets:
+  - {fileID: 11400000, guid: f361d1deea606e54b8b86e649040df1c, type: 2}
