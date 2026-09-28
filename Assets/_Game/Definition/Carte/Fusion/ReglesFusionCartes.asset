@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e51d2d5dada884f9ec53a707eac9cd, type: 3}
+  m_Name: ReglesFusionCartes
+  m_EditorClassIdentifier: Assembly-CSharp::ReglesFusionCartes
+  valeursFusion:
+  - niveau: 1
+    points: 1
+  - niveau: 2
+    points: 3
+  - niveau: 3
+    points: 6
+  - niveau: 4
+    points: 10
+  - niveau: 5
+    points: 18
+  - niveau: 6
+    points: 30
+  coutsEvolution:
+  - niveau: 2
+    pointsNecessaires: 3
+  - niveau: 3
+    pointsNecessaires: 6
+  - niveau: 4
+    pointsNecessaires: 10
+  - niveau: 5
+    pointsNecessaires: 18
+  - niveau: 6
+    pointsNecessaires: 30
