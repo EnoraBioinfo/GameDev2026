@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -12,6 +13,9 @@ public class GestionnaireSauvegarde : MonoBehaviour
     [SerializeField]
     private CatalogueCartesScriptable catalogueCartesScriptable;
 
+    [SerializeField]
+    private GestionnaireProgression gestionnaireProgression;
+
     private string CheminSauvegarde => Path.Combine(
         Application.persistentDataPath,
         NomFichierSauvegarde);
@@ -21,6 +25,12 @@ public class GestionnaireSauvegarde : MonoBehaviour
         if (gestionnaireCartes == null)
         {
             Debug.LogError("GestionnaireCartes non configuré.");
+            return;
+        }
+
+        if (gestionnaireProgression == null)
+        {
+            Debug.LogError("gestionnaireProgression non configuré.");
             return;
         }
 
@@ -38,6 +48,12 @@ public class GestionnaireSauvegarde : MonoBehaviour
         if (gestionnaireCartes == null)
         {
             Debug.LogError("GestionnaireCartes non configuré.");
+            return;
+        }
+
+        if (gestionnaireProgression == null)
+        {
+            Debug.LogError("gestionnaireProgression non configuré.");
             return;
         }
 
@@ -74,8 +90,14 @@ public class GestionnaireSauvegarde : MonoBehaviour
 
         SauvegarderCollection(sauvegarde);
         SauvegarderDecks(sauvegarde);
+        SauvegarderProgression(sauvegarde);
 
         return sauvegarde;
+    }
+
+    private void SauvegarderProgression(JoueurSauvegarde sauvegarde)
+    {
+        sauvegarde.progression = gestionnaireProgression.CreerSauvegarde();
     }
 
     private void SauvegarderCollection(JoueurSauvegarde sauvegarde)
@@ -94,8 +116,7 @@ public class GestionnaireSauvegarde : MonoBehaviour
 
     private void SauvegarderDecks(JoueurSauvegarde sauvegarde)
     {
-        sauvegarde.indexDeckSelectionne =
-            gestionnaireCartes.GestionnaireDecks.IndexDeckSelectionne;
+        sauvegarde.indexDeckSelectionne = gestionnaireCartes.GestionnaireDecks.IndexDeckSelectionne;
 
         for (int i = 0; i < gestionnaireCartes.GestionnaireDecks.ObtenirNombreDecks(); i++)
         {
@@ -123,6 +144,9 @@ public class GestionnaireSauvegarde : MonoBehaviour
     {
         gestionnaireCartes.Initialiser();
         gestionnaireCartes.GestionnaireDecks.ViderDecks();
+
+        gestionnaireProgression.Initialiser();
+        gestionnaireProgression.ChargerSauvegarde(sauvegarde.progression);
 
         Dictionary<string, CarteInstance> cartesChargees = ChargerCollection(sauvegarde);
 

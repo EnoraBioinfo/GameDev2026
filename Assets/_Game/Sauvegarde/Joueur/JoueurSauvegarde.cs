@@ -8,4 +8,6 @@ public class JoueurSauvegarde
     public List<DeckSauvegarde> decks = new List<DeckSauvegarde>();
 
     public int indexDeckSelectionne;
+
+    public ProgressionJoueurSauvegarde progression = new ProgressionJoueurSauvegarde();
 }
