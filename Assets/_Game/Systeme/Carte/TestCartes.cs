@@ -17,6 +17,23 @@ public class TestCartes : MonoBehaviour
         gestionnaireCartes.AjouterCarte(epeeDeBronze, 3);
         gestionnaireCartes.AjouterCarte(epeeDeBronze, 3);
 
+        List<CarteInstance> cartes = gestionnaireCartes.Collection.ObtenirCartes(epeeDeBronze);
+
+        gestionnaireCartes.GestionnaireDecks.SelectionnerDeck(0);
+
+        DeckJoueur deck1 = gestionnaireCartes.DeckSelectionne;
+
+        bool ajoutDeck1 = gestionnaireCartes.AjouterCarteAuDeck(cartes[0]);
+
+        Debug.Log($"Ajout au {deck1.Nom} : {ajoutDeck1}");
+
+        gestionnaireCartes.GestionnaireDecks.SelectionnerDeck(1);
+
+        DeckJoueur deck2 = gestionnaireCartes.DeckSelectionne;
+
+        gestionnaireCartes.AjouterCarteAuDeck(cartes[1]);
+        gestionnaireCartes.AjouterCarteAuDeck(cartes[2]);
+
         CarteInstance carte = gestionnaireCartes.Collection.ObtenirCartesDeNiveau(epeeDeBronze, 1)[0];
 
         Debug.Log($"Nombre de decks : {gestionnaireCartes.GestionnaireDecks.ObtenirNombreDecks()}");

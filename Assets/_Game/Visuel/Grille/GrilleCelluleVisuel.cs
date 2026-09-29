@@ -8,42 +8,65 @@ public class GrilleCelluleVisuel : MonoBehaviour
     private Renderer rendu;
 
     [SerializeField]
-    private Material materiauNormal;
+    private float facteurEclaircissement = 1.25f;
 
-    [SerializeField]
-    private Material materiauSelectionne;
-
-    [SerializeField]
-    private Material materiauBloque;
+    private Material[] materiaux;
+    private Color[] couleursOriginales;
 
     public void Initialiser(GrillePosition position)
     {
         Position = position;
+
+        if (rendu != null)
+        {
+            materiaux = rendu.materials;
+            couleursOriginales = new Color[materiaux.Length];
+
+            for (int i = 0; i < materiaux.Length; i++)
+            {
+                couleursOriginales[i] = materiaux[i].color;
+            }
+        }
 
         Deselectionner();
     }
 
     public void Selectionner()
     {
-        if (rendu != null && materiauSelectionne != null)
+        if (materiaux == null)
         {
-            rendu.material = materiauSelectionne;
+            return;
+        }
+
+        for (int i = 0; i < materiaux.Length; i++)
+        {
+            materiaux[i].color = couleursOriginales[i] * facteurEclaircissement;
         }
     }
 
     public void Deselectionner()
     {
-        if (rendu != null && materiauNormal != null)
+        if (materiaux == null)
         {
-            rendu.material = materiauNormal;
+            return;
+        }
+
+        for (int i = 0; i < materiaux.Length; i++)
+        {
+            materiaux[i].color = couleursOriginales[i];
         }
     }
 
     public void DefinirBloquee()
     {
-        if (rendu != null && materiauBloque != null)
+        if (materiaux == null)
         {
-            rendu.material = materiauBloque;
+            return;
+        }
+
+        for (int i = 0; i < materiaux.Length; i++)
+        {
+            materiaux[i].color = couleursOriginales[i] * 0.5f;
         }
     }
 }

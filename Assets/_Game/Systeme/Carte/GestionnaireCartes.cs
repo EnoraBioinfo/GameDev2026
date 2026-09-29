@@ -25,8 +25,6 @@ public class GestionnaireCartes : MonoBehaviour
         collection = new CollectionCartes();
         gestionnaireDecks = new GestionnaireDecks(reglesDeck, nombreDecks);
         systemeFusionCartes = new SystemeFusionCartes(reglesFusion);
-
-        Debug.Log("Gestionnaire de cartes initialisé.");
     }
 
     public CarteInstance AjouterCarteAvecIdentifiant(string identifiant, CarteDefinitionScriptable definition, int niveau)
