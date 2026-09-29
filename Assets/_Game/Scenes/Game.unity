@@ -476,6 +476,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GestionnaireSauvegarde
   gestionnaireCartes: {fileID: 1568656114}
   catalogueCartesScriptable: {fileID: 11400000, guid: 3f4a51a982ed14e439c33c0819385c8c, type: 2}
+  gestionnaireTotems: {fileID: 1739937602}
+  catalogueTotemsScriptable: {fileID: 11400000, guid: 467b73b8c811a4a4c9a5652c90b88337, type: 2}
   gestionnaireProgression: {fileID: 382210404}
 --- !u!4 &674063781
 Transform:

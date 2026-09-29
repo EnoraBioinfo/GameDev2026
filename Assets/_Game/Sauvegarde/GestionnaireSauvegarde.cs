@@ -14,6 +14,12 @@ public class GestionnaireSauvegarde : MonoBehaviour
     private CatalogueCartesScriptable catalogueCartesScriptable;
 
     [SerializeField]
+    private GestionnaireTotems gestionnaireTotems;
+
+    [SerializeField]
+    private CatalogueTotemsScriptable catalogueTotemsScriptable;
+
+    [SerializeField]
     private GestionnaireProgression gestionnaireProgression;
 
     private string CheminSauvegarde => Path.Combine(
@@ -22,15 +28,15 @@ public class GestionnaireSauvegarde : MonoBehaviour
 
     public void Sauvegarder()
     {
-        if (gestionnaireCartes == null)
+        if (gestionnaireCartes == null || gestionnaireTotems == null || gestionnaireProgression == null)
         {
-            Debug.LogError("GestionnaireCartes non configuré.");
+            Debug.LogError("Gestionnaires non configurés.");
             return;
         }
 
-        if (gestionnaireProgression == null)
+        if (catalogueCartesScriptable == null || catalogueTotemsScriptable == null)
         {
-            Debug.LogError("gestionnaireProgression non configuré.");
+            Debug.LogError("Catalogues non configurés.");
             return;
         }
 
@@ -45,21 +51,15 @@ public class GestionnaireSauvegarde : MonoBehaviour
 
     public void Charger()
     {
-        if (gestionnaireCartes == null)
+        if (gestionnaireCartes == null || gestionnaireTotems == null || gestionnaireProgression == null)
         {
-            Debug.LogError("GestionnaireCartes non configuré.");
+            Debug.LogError("Gestionnaires non configurés.");
             return;
         }
 
-        if (gestionnaireProgression == null)
+        if (catalogueCartesScriptable == null || catalogueTotemsScriptable == null)
         {
-            Debug.LogError("gestionnaireProgression non configuré.");
-            return;
-        }
-
-        if (catalogueCartesScriptable == null)
-        {
-            Debug.LogError("CatalogueCartesScriptable non configuré.");
+            Debug.LogError("Catalogues non configurés.");
             return;
         }
 
@@ -90,6 +90,8 @@ public class GestionnaireSauvegarde : MonoBehaviour
 
         SauvegarderCollection(sauvegarde);
         SauvegarderDecks(sauvegarde);
+        SauvegarderTotems(sauvegarde);
+        SauvegarderEnsemblesTotems(sauvegarde);
         SauvegarderProgression(sauvegarde);
 
         return sauvegarde;
@@ -140,24 +142,67 @@ public class GestionnaireSauvegarde : MonoBehaviour
         }
     }
 
+    private void SauvegarderTotems(JoueurSauvegarde sauvegarde)
+    {
+        foreach (TotemInstance totem in gestionnaireTotems.Collection.Totems)
+        {
+            TotemSauvegarde totemSauvegarde = new TotemSauvegarde();
+
+            totemSauvegarde.identifiant = totem.Identifiant;
+            totemSauvegarde.identifiantTotemDefinitionScriptable = totem.DefinitionScriptable.identifiant;
+            totemSauvegarde.nombrePossede = totem.NombrePossede;
+
+            sauvegarde.totems.Add(totemSauvegarde);
+        }
+    }
+
+    private void SauvegarderEnsemblesTotems(JoueurSauvegarde sauvegarde)
+    {
+        sauvegarde.indexEnsembleTotemSelectionne = gestionnaireTotems.GestionnaireEnsemblesTotems.IndexEnsembleTotemSelectionne;
+
+        for (int i = 0; i < gestionnaireTotems.GestionnaireEnsemblesTotems.ObtenirNombreEnsemblesTotems(); i++)
+        {
+            EnsembleTotemJoueur ensembleTotem = gestionnaireTotems.GestionnaireEnsemblesTotems.ObtenirEnsembleTotem(i);
+
+            if (ensembleTotem == null)
+            {
+                continue;
+            }
+
+            EnsembleTotemSauvegarde ensembleTotemSauvegarde = new EnsembleTotemSauvegarde();
+
+            ensembleTotemSauvegarde.nom = ensembleTotem.Nom;
+
+            foreach (TotemInstance totem in ensembleTotem.Totems)
+            {
+                ensembleTotemSauvegarde.identifiantsTotems.Add(totem.Identifiant);
+            }
+
+            sauvegarde.ensemblesTotems.Add(ensembleTotemSauvegarde);
+        }
+    }
+
     private void ChargerSauvegarde(JoueurSauvegarde sauvegarde)
     {
         gestionnaireCartes.Initialiser();
         gestionnaireCartes.GestionnaireDecks.ViderDecks();
 
+        gestionnaireTotems.Initialiser();
+        gestionnaireTotems.GestionnaireEnsemblesTotems.ViderEnsemblesTotems();
+
         gestionnaireProgression.Initialiser();
         gestionnaireProgression.ChargerSauvegarde(sauvegarde.progression);
 
         Dictionary<string, CarteInstance> cartesChargees = ChargerCollection(sauvegarde);
-
         ChargerDecks(sauvegarde, cartesChargees);
+
+        Dictionary<string, TotemInstance> totemsCharges = ChargerTotems(sauvegarde);
+        ChargerEnsemblesTotems(sauvegarde, totemsCharges);
     }
 
-    private Dictionary<string, CarteInstance> ChargerCollection(
-        JoueurSauvegarde sauvegarde)
+    private Dictionary<string, CarteInstance> ChargerCollection(JoueurSauvegarde sauvegarde)
     {
-        Dictionary<string, CarteInstance> cartesChargees =
-            new Dictionary<string, CarteInstance>();
+        Dictionary<string, CarteInstance> cartesChargees = new Dictionary<string, CarteInstance>();
 
         foreach (CarteSauvegarde carteSauvegarde in sauvegarde.cartes)
         {
@@ -166,15 +211,11 @@ public class GestionnaireSauvegarde : MonoBehaviour
                 continue;
             }
 
-            CarteDefinitionScriptable definition =
-                catalogueCartesScriptable.ObtenirCarte(
-                    carteSauvegarde.identifiantCarteDefinitionScriptable);
+            CarteDefinitionScriptable definition = catalogueCartesScriptable.ObtenirCarte(carteSauvegarde.identifiantCarteDefinitionScriptable);
 
             if (definition == null)
             {
-                Debug.LogWarning(
-                    $"Carte introuvable dans le catalogue : " +
-                    $"{carteSauvegarde.identifiantCarteDefinitionScriptable}");
+                Debug.LogWarning( $"Carte introuvable dans le catalogue : " + $"{carteSauvegarde.identifiantCarteDefinitionScriptable}");
 
                 continue;
             }
@@ -195,9 +236,7 @@ public class GestionnaireSauvegarde : MonoBehaviour
         return cartesChargees;
     }
 
-    private void ChargerDecks(
-    JoueurSauvegarde sauvegarde,
-    Dictionary<string, CarteInstance> cartesChargees)
+    private void ChargerDecks(JoueurSauvegarde sauvegarde, Dictionary<string, CarteInstance> cartesChargees)
     {
         for (int i = 0; i < sauvegarde.decks.Count; i++)
         {
@@ -208,9 +247,7 @@ public class GestionnaireSauvegarde : MonoBehaviour
                 continue;
             }
 
-            DeckJoueur deck =
-                gestionnaireCartes.GestionnaireDecks.CreerDeck(
-                    deckSauvegarde.nom);
+            DeckJoueur deck = gestionnaireCartes.GestionnaireDecks.CreerDeck(deckSauvegarde.nom);
 
             if (deck == null)
             {
@@ -219,23 +256,88 @@ public class GestionnaireSauvegarde : MonoBehaviour
 
             foreach (string identifiantCarte in deckSauvegarde.identifiantsCartes)
             {
-                if (!cartesChargees.TryGetValue(
-                    identifiantCarte,
-                    out CarteInstance carte))
+                if (!cartesChargees.TryGetValue(identifiantCarte, out CarteInstance carte))
                 {
-                    Debug.LogWarning(
-                        $"Carte du deck introuvable : {identifiantCarte}");
+                    Debug.LogWarning($"Carte du deck introuvable : {identifiantCarte}");
 
                     continue;
                 }
 
-                gestionnaireCartes.GestionnaireDecks.AjouterCarteAuDeck(
-                    deck,
-                    carte);
+                gestionnaireCartes.GestionnaireDecks.AjouterCarteAuDeck(deck, carte);
             }
         }
 
-        gestionnaireCartes.SelectionnerDeck(
-            sauvegarde.indexDeckSelectionne);
+        gestionnaireCartes.SelectionnerDeck(sauvegarde.indexDeckSelectionne);
+    }
+
+
+    private Dictionary<string, TotemInstance> ChargerTotems(JoueurSauvegarde sauvegarde)
+    {
+        Dictionary<string, TotemInstance> totemsCharges = new Dictionary<string, TotemInstance>();
+
+        foreach (TotemSauvegarde totemSauvegarde in sauvegarde.totems)
+        {
+            if (totemSauvegarde == null)
+            {
+                continue;
+            }
+
+            TotemDefinitionScriptable definitionScriptable = catalogueTotemsScriptable.ObtenirTotem(totemSauvegarde.identifiantTotemDefinitionScriptable);
+
+            if (definitionScriptable == null)
+            {
+                Debug.LogWarning($"Totem introuvable dans le catalogue : " + $"{totemSauvegarde.identifiantTotemDefinitionScriptable}");
+
+                continue;
+            }
+
+            TotemInstance totem = gestionnaireTotems.AjouterTotemAvecIdentifiant(
+                totemSauvegarde.identifiant,
+                definitionScriptable,
+                totemSauvegarde.nombrePossede);
+
+            if (totem == null)
+            {
+                continue;
+            }
+
+            totemsCharges.Add(totem.Identifiant, totem);
+        }
+
+        return totemsCharges;
+    }
+
+    private void ChargerEnsemblesTotems(JoueurSauvegarde sauvegarde, Dictionary<string, TotemInstance> totemsCharges)
+    {
+        for (int i = 0; i < sauvegarde.ensemblesTotems.Count; i++)
+        {
+            EnsembleTotemSauvegarde ensembleTotemSauvegarde = sauvegarde.ensemblesTotems[i];
+
+            if (ensembleTotemSauvegarde == null)
+            {
+                continue;
+            }
+
+            EnsembleTotemJoueur ensembleTotem = gestionnaireTotems.GestionnaireEnsemblesTotems.CreerEnsembleTotem(ensembleTotemSauvegarde.nom);
+
+            if (ensembleTotem == null)
+            {
+                continue;
+            }
+
+            foreach (string identifiantTotem in ensembleTotemSauvegarde.identifiantsTotems)
+            {
+                if (!totemsCharges.TryGetValue(identifiantTotem, out TotemInstance totem))
+                {
+                    Debug.LogWarning($"Totem de l'ensemble totem introuvable : {identifiantTotem}");
+
+                    continue;
+                }
+
+                gestionnaireTotems.GestionnaireEnsemblesTotems.AjouterTotemAEnsembleTotem(ensembleTotem, totem);
+            }
+        }
+
+        gestionnaireTotems.SelectionnerEnsembleTotem(sauvegarde.indexEnsembleTotemSelectionne);
     }
 }
