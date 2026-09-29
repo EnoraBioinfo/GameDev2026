@@ -39,7 +39,7 @@ public class EnsembleTotemJoueur
             return false;
         }
 
-        if (ObtenirNombreCartes() >= reglesEnsembleTotem.nombreMaximumTotems)
+        if (ObtenirNombreTotems() >= reglesEnsembleTotem.nombreMaximumTotems)
         {
             return false;
         }
@@ -69,7 +69,7 @@ public class EnsembleTotemJoueur
         return totems.Remove(totem);
     }
 
-    public int ObtenirNombreCartes()
+    public int ObtenirNombreTotems()
     {
         return totems.Count;
     }

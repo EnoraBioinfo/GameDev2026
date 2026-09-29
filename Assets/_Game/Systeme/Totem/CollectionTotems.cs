@@ -32,16 +32,19 @@ public class CollectionTotems
         return totems.Remove(totem);
     }
 
-    public int ObtenirNombreTotems()
+    public int ObtenirNombreTotemsTotal()
     {
         return totems.Count;
     }
 
-    public List<TotemInstance> ObtenirTotems(TotemDefinitionScriptable definitionScriptable)
+    public TotemInstance ObtenirTotem(TotemDefinitionScriptable definitionScriptable)
     {
-        return totems
-            .Where(totem => totem.DefinitionScriptable == definitionScriptable)
-            .ToList();
+        if (definitionScriptable == null)
+        {
+            return null;
+        }
+
+        return totems.FirstOrDefault(totem => totem.DefinitionScriptable == definitionScriptable);
     }
 
     public TotemInstance ObtenirTotem(string identifiant)
@@ -56,7 +59,24 @@ public class CollectionTotems
 
     public int ObtenirNombreTotems(TotemDefinitionScriptable definitionScriptable)
     {
-        return totems.Count(totem => totem.DefinitionScriptable == definitionScriptable);
+        TotemInstance totem = totems.FirstOrDefault(totem => totem.DefinitionScriptable == definitionScriptable);
+
+        if (totem == null)
+        {
+            return 0;
+        }
+
+        return totem.NombrePossede;
+    }
+
+    public int ObtenirNombreTotems(TotemInstance totem)
+    {
+        if (totem == null || !totems.Contains(totem))
+        {
+            return 0;
+        }
+
+        return totem.NombrePossede;
     }
 
     public bool ContientTotem(TotemInstance totem)
