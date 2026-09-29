@@ -3,6 +3,7 @@ using System.Linq;
 
 public class EnsembleTotemJoueur
 {
+   
     private readonly List<TotemInstance> totems;
     private readonly ReglesEnsembleTotemScriptable reglesEnsembleTotem;
     public string Nom { get; private set; }
@@ -26,66 +27,65 @@ public class EnsembleTotemJoueur
         Nom = nouveauNom;
     }
 
-    public bool PeutAjouterCarte(CarteInstance carte)
+    public bool PeutAjouterTotem(TotemInstance totem)
     {
-        if (reglesDeck == null || carte == null)
+        if (reglesEnsembleTotem == null || totem == null)
         {
             return false;
         }
 
-        if (cartes.Contains(carte))
+        if (totems.Contains(totem))
         {
             return false;
         }
 
-        if (ObtenirNombreCartes() >= reglesDeck.nombreMaximumCartes)
+        if (ObtenirNombreCartes() >= reglesEnsembleTotem.nombreMaximumTotems)
         {
             return false;
         }
 
-        return ObtenirNombreCartes(carte.Definition) < reglesDeck.nombreMaximumMemeCarte;
+        return !TotemDejaEquipe(totem.DefinitionScriptable);
     }
 
-    public bool AjouterCarte(CarteInstance carte)
+    public bool AjouterTotem(TotemInstance totem)
     {
-        if (!PeutAjouterCarte(carte))
+        if (!PeutAjouterTotem(totem))
         {
             return false;
         }
 
-        cartes.Add(carte);
+        totems.Add(totem);
 
         return true;
     }
 
-    public bool RetirerCarte(CarteInstance carte)
+    public bool RetirerTotem(TotemInstance totem)
     {
-        if (carte == null)
+        if (totem == null)
         {
             return false;
         }
 
-        return cartes.Remove(carte);
+        return totems.Remove(totem);
     }
 
     public int ObtenirNombreCartes()
     {
-        return cartes.Count;
+        return totems.Count;
     }
 
-    public int ObtenirNombreCartes(CarteDefinitionScriptable definition)
+    public bool TotemDejaEquipe(TotemDefinitionScriptable definitionScriptable)
     {
-        return cartes.Count(carte => carte.Definition == definition);
+        return totems.Count(totem => totem.DefinitionScriptable == definitionScriptable) > 0;
     }
 
     public bool EstValide()
     {
-        if (reglesDeck == null)
+        if (reglesEnsembleTotem == null)
         {
             return false;
         }
 
-        return cartes.Count >= reglesDeck.nombreMinimumCartes &&
-               cartes.Count <= reglesDeck.nombreMaximumCartes;
+        return totems.Count <= reglesEnsembleTotem.nombreMaximumTotems;
     }
 }
