@@ -541,13 +541,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738953587}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
-  m_LocalPosition: {x: -2.5, y: 10, z: -2.5}
+  m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
+  m_LocalPosition: {x: -2.5, y: 6, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
 --- !u!114 &738953591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,7 +794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrilleVisuel
   definition: {fileID: 11400000, guid: d702fbb6105d62f49bdbbcd73cb3f800, type: 2}
-  cellulePrefab: {fileID: 405479372722674600, guid: 6056aaab2409a9344896e93619c1c68a, type: 3}
+  cellulePrefab: {fileID: 5004354034245895784, guid: 9e0c4d5af194b714eb6669d76b771855, type: 3}
   obstaclePrefab: {fileID: 4555461695177849309, guid: a5f4a7b82c9bf22439d998ce13b49dad, type: 3}
 --- !u!4 &1061427902
 Transform:
