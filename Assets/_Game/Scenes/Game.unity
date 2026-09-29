@@ -857,6 +857,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1077487402}
+  - component: {fileID: 1077487403}
   m_Layer: 0
   m_Name: TestTotems
   m_TagString: Untagged
@@ -879,6 +880,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 587701996}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1077487403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077487401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae0684386f46944e8a913b4ea1388ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestTotems
+  gestionnaireTotems: {fileID: 1739937602}
+  catalogueTotems: {fileID: 11400000, guid: 467b73b8c811a4a4c9a5652c90b88337, type: 2}
 --- !u!1 &1108870988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,7 +1142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GestionnaireTotems
   reglesEnsembleTotem: {fileID: 11400000, guid: 6f333f671755a9e4ab4d78e755740d8c, type: 2}
-  gestionnaireProgression: {fileID: 0}
+  gestionnaireProgression: {fileID: 382210404}
   nombreEnsemblesTotems: 2
 --- !u!1 &1830000670
 GameObject:

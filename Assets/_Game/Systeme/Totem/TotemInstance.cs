@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class TotemInstance
 {
@@ -32,7 +33,7 @@ public class TotemInstance
 
     public bool RetirerExemplaires(int quantite)
     {
-        if (quantite <= 1 || NombrePossede < quantite)
+        if (NombrePossede <= 1 || NombrePossede < quantite)
         {
             return false;
         }

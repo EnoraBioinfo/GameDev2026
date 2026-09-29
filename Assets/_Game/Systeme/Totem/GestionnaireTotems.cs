@@ -143,7 +143,7 @@ public class GestionnaireTotems : MonoBehaviour
 
     public int VendrePlusieursTotems(TotemInstance totem, int nombreAVendre)
     {
-        if(totem == null || nombreAVendre == null)
+        if(totem == null || nombreAVendre == 0)
         {
             return 0;
         }
