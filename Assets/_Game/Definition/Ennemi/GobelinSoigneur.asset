@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99958d07956861a4a816bb11369dbf8b, type: 3}
+  m_Name: GobelinSoigneur
+  m_EditorClassIdentifier: Assembly-CSharp::EnnemiDefinitionScriptable
+  nom: Gobelin Soigneur
+  description: "Pas de chance, un gobelin d\xE9bile mais qui sait taper et se soigner ! Le top dans une arm\xE9e"
+  prefab: {fileID: 6732148471514055863, guid: 0a862a290ad04d84fb95715b3c5ae220, type: 3}
+  pointsDeVieMaximum: 10
+  nombreActions: 1
+  recompenseOr: 10
+  dropsTotems:
+  - totem: {fileID: 11400000, guid: e129c56c04342d54a945bb230836940b, type: 2}
+    pourcentageDrop: 50
+  - totem: {fileID: 11400000, guid: ccffbb818974216449e583ccbef1eade, type: 2}
+    pourcentageDrop: 10
+  comportement: 1
+  attaques:
+  - {fileID: 11400000, guid: f94e8d691a0118045b5eacb1b40ce18c, type: 2}
+  - {fileID: 11400000, guid: 050346ec3f5bb47438b50d5f9165a9c0, type: 2}
