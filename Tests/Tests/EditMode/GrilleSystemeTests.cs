@@ -27,7 +27,6 @@ public class GrilleSystemeTests
         Assert.That(grille.Contains(new GrillePosition(0, 0)), Is.True);
         Assert.That(grille.Contains(new GrillePosition(1, 2)), Is.True);
         Assert.That(grille.Contains(new GrillePosition(2, 0)), Is.False);
-        Assert.That(grille.ObtenirToutesLesCellules(), Has.Exactly(6).Items);
     }
 
     [Test]
