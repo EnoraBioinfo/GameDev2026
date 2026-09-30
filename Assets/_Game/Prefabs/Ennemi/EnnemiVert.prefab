@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7590497276865303135}
   - component: {fileID: 7857245837090819837}
   m_Layer: 0
-  m_Name: Ennemi
+  m_Name: EnnemiVert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a5f9355a10755a24f9338dd82df4d5b6, type: 2}
+  - {fileID: 2100000, guid: 8fa29d90b68db7f45a813ec670b3e274, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -1,19 +1,37 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(
     fileName = "EnnemiDefinitionScriptable",
-    menuName = "Jeu/Joueur/Définition du joueur"
+    menuName = "Jeu/Ennemi/Définition d'un ennemi"
 )]
-public class EnnemiDefinitionScriptable
+
+public class EnnemiDefinitionScriptable : ScriptableObject
 { 
-    [Header("Déplacement")]
-    [Min(0)]
-    public int pointsMouvementMaximum = 3;
+    [Header("Informations")]
+    public string nom;
+    [TextArea(2, 5)]
+    public string description;
 
-    [Header("Segments d'Actions")]
+    [Header("Visuel")]
+    public GameObject prefab;
+
+    [Header("Statistiques")]
     [Min(1)]
-    public int nombreSegmentsAction = 1;
+    public int pointsDeVieMaximum = 10;
 
-    [Header("Combat")]
-    public int pointDeVieMaximum = 10;
+    [Min(1)]
+    public int nombreActions = 1;
+
+    [Header("Récompenses")]
+    [Min(0)]
+    public int recompenseOr = 10;
+
+    public List<DropTotemEnnemi> dropsTotems = new();
+
+    [Header("Comportement")]
+    public ComportementEnnemi comportement;
+
+    [Header("Attaques")]
+    public List<AttaqueEnnemiDefinitionScriptable> attaques = new();
 }

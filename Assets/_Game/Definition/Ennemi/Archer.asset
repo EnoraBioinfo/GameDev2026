@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99958d07956861a4a816bb11369dbf8b, type: 3}
+  m_Name: Archer
+  m_EditorClassIdentifier: Assembly-CSharp::EnnemiDefinitionScriptable
+  nom: Archer
+  description: "Un archer tout moche on ne connait m\xEAme pas sa forme"
+  prefab: {fileID: 6732148471514055863, guid: c3ce41d4d85e6d949b8f57a0a30d7199, type: 3}
+  pointsDeVieMaximum: 5
+  nombreActions: 3
+  recompenseOr: 4
+  dropsTotems: []
+  comportement: 0
+  attaques:
+  - {fileID: 11400000, guid: 7eca9a494bc348a4c9418427f000ff5e, type: 2}

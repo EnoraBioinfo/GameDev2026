@@ -3,19 +3,24 @@ using UnityEngine;
 public class GestionnaireEnnemi : MonoBehaviour
 {
     [SerializeField]
-    private GameObject ennemiPrefab;
+    private EnnemiDefinitionScriptable ennemiDefinitionScriptable;
 
     [SerializeField]
     private GrilleVisuel grilleVisuel;
 
+    private EnnemiEtat ennemiEtat;
+    private EnnemiStatistiques ennemiStatistiques;
     private EnnemiSysteme ennemiSysteme;
+
     private EnnemiVisuel ennemiVisuel;
 
     private void Start()
     {
         GrillePosition positionInitiale = new GrillePosition(0, 3);
 
-        ennemiSysteme = new EnnemiSysteme(positionInitiale);
+        ennemiStatistiques = new EnnemiStatistiques(ennemiDefinitionScriptable, 1);
+        ennemiEtat = new EnnemiEtat(ennemiStatistiques);
+        ennemiSysteme = new EnnemiSysteme(ennemiEtat, positionInitiale);
 
         bool placementReussi = grilleVisuel.Grille.PlacerOccupant(ennemiSysteme, positionInitiale);
 
@@ -33,7 +38,7 @@ public class GestionnaireEnnemi : MonoBehaviour
 
     private void CreerEnnemiVisuel()
     {
-        GameObject ennemiObjet = Instantiate(ennemiPrefab);
+        GameObject ennemiObjet = Instantiate(ennemiDefinitionScriptable.prefab);
 
         ennemiVisuel = ennemiObjet.GetComponent<EnnemiVisuel>();
 
