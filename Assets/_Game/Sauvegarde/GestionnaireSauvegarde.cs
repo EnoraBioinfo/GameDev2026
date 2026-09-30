@@ -28,15 +28,8 @@ public class GestionnaireSauvegarde : MonoBehaviour
 
     public void Sauvegarder()
     {
-        if (gestionnaireCartes == null || gestionnaireTotems == null || gestionnaireProgression == null)
+        if (!ReferencesValides())
         {
-            Debug.LogError("Gestionnaires non configurés.");
-            return;
-        }
-
-        if (catalogueCartesScriptable == null || catalogueTotemsScriptable == null)
-        {
-            Debug.LogError("Catalogues non configurés.");
             return;
         }
 
@@ -51,15 +44,8 @@ public class GestionnaireSauvegarde : MonoBehaviour
 
     public void Charger()
     {
-        if (gestionnaireCartes == null || gestionnaireTotems == null || gestionnaireProgression == null)
+        if (!ReferencesValides())
         {
-            Debug.LogError("Gestionnaires non configurés.");
-            return;
-        }
-
-        if (catalogueCartesScriptable == null || catalogueTotemsScriptable == null)
-        {
-            Debug.LogError("Catalogues non configurés.");
             return;
         }
 
@@ -82,6 +68,17 @@ public class GestionnaireSauvegarde : MonoBehaviour
         ChargerSauvegarde(sauvegarde);
 
         Debug.Log("Sauvegarde chargée.");
+    }
+
+    private bool ReferencesValides()
+    {
+        return ValidationReferencesUnity.Verifier(
+            this,
+            (nameof(gestionnaireCartes), gestionnaireCartes),
+            (nameof(catalogueCartesScriptable), catalogueCartesScriptable),
+            (nameof(gestionnaireTotems), gestionnaireTotems),
+            (nameof(catalogueTotemsScriptable), catalogueTotemsScriptable),
+            (nameof(gestionnaireProgression), gestionnaireProgression));
     }
 
     private JoueurSauvegarde CreerSauvegarde()

@@ -17,6 +17,14 @@ public class GrilleVisuel : MonoBehaviour
 
     private void Awake()
     {
+        if (!ValidationReferencesUnity.Verifier(
+                this,
+                (nameof(definition), definition),
+                (nameof(cellulePrefab), cellulePrefab)))
+        {
+            return;
+        }
+
         this.grille = new GrilleSysteme(definition);
 
         CreerVisuelGrille();
@@ -40,6 +48,16 @@ public class GrilleVisuel : MonoBehaviour
                 );
 
                 GrilleCelluleVisuel celluleVisuel = cellule.GetComponent<GrilleCelluleVisuel>();
+
+                if (celluleVisuel == null)
+                {
+                    Debug.LogError(
+                        $"{nameof(GrilleVisuel)} '{name}' : le prefab '{cellulePrefab.name}' " +
+                        $"ne contient pas le composant {nameof(GrilleCelluleVisuel)}.",
+                        this);
+                    Destroy(cellule);
+                    return;
+                }
 
                 celluleVisuel.Initialiser(position);
             }

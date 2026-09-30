@@ -22,6 +22,14 @@ public class GestionnaireCartes : MonoBehaviour
 
     public void Initialiser()
     {
+        if (!ValidationReferencesUnity.Verifier(
+                this,
+                (nameof(reglesDeck), reglesDeck),
+                (nameof(reglesFusion), reglesFusion)))
+        {
+            return;
+        }
+
         collection = new CollectionCartes();
         gestionnaireDecks = new GestionnaireDecks(reglesDeck, nombreDecks);
         systemeFusionCartes = new SystemeFusionCartes(reglesFusion);
@@ -44,11 +52,7 @@ public class GestionnaireCartes : MonoBehaviour
             return null;
         }
 
-        CarteInstance carte = new CarteInstance(
-            identifiant,
-            definition,
-            niveau);
-
+        CarteInstance carte = new CarteInstance(identifiant, definition, niveau);
         collection.AjouterCarte(carte);
 
         return carte;

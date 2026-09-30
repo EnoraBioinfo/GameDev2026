@@ -45,8 +45,20 @@ public class UIDebugJoueur : MonoBehaviour
 
     private void ActualiserProgression()
     {
-        if (gestionnaireProgression == null || texteProgression == null || gestionnaireJoueur == null)
+        if (!ValidationReferencesUnity.Verifier(
+                this,
+                (nameof(gestionnaireProgression), gestionnaireProgression),
+                (nameof(texteProgression), texteProgression),
+                (nameof(gestionnaireJoueur), gestionnaireJoueur)))
         {
+            return;
+        }
+
+        if (gestionnaireProgression.Progression == null || gestionnaireJoueur.JoueurEtat == null)
+        {
+            Debug.LogError(
+                $"{nameof(UIDebugJoueur)} '{name}' : les gestionnaires de progression ou de joueur ne sont pas initialisés.",
+                this);
             return;
         }
 
@@ -72,8 +84,17 @@ public class UIDebugJoueur : MonoBehaviour
 
     private void ActualiserCartes()
     {
-        if (gestionnaireCartes == null || gestionnaireCartes.Collection == null || texteCartes == null)
+        if (!ValidationReferencesUnity.Verifier(
+                this,
+                (nameof(gestionnaireCartes), gestionnaireCartes),
+                (nameof(texteCartes), texteCartes)))
         {
+            return;
+        }
+
+        if (gestionnaireCartes.Collection == null)
+        {
+            Debug.LogError($"{nameof(UIDebugJoueur)} '{name}' : {nameof(gestionnaireCartes)} n'est pas initialisé.", this);
             return;
         }
 
@@ -94,8 +115,17 @@ public class UIDebugJoueur : MonoBehaviour
 
     private void ActualiserTotems()
     {
-        if (gestionnaireTotems == null || gestionnaireTotems.Collection == null || texteTotems == null)
+        if (!ValidationReferencesUnity.Verifier(
+                this,
+                (nameof(gestionnaireTotems), gestionnaireTotems),
+                (nameof(texteTotems), texteTotems)))
         {
+            return;
+        }
+
+        if (gestionnaireTotems.Collection == null)
+        {
+            Debug.LogError($"{nameof(UIDebugJoueur)} '{name}' : {nameof(gestionnaireTotems)} n'est pas initialisé.", this);
             return;
         }
 
@@ -116,13 +146,21 @@ public class UIDebugJoueur : MonoBehaviour
 
     private void ActualiserEnsemblesTotems()
     {
-        if (gestionnaireTotems == null || texteEnsemblesTotems == null)
+        if (!ValidationReferencesUnity.Verifier(
+                this,
+                (nameof(gestionnaireTotems), gestionnaireTotems),
+                (nameof(texteEnsemblesTotems), texteEnsemblesTotems)))
         {
             return;
         }
 
-        StringBuilder texte = new StringBuilder();
+        if (gestionnaireTotems.GestionnaireEnsemblesTotems == null)
+        {
+            Debug.LogError($"{nameof(UIDebugJoueur)} '{name}' : les ensembles de totems ne sont pas initialisés.", this);
+            return;
+        }
 
+        StringBuilder texte = new StringBuilder();
         texte.AppendLine("=== ENSEMBLES DE TOTEMS ===");
 
         for (int i = 0; i < gestionnaireTotems.GestionnaireEnsemblesTotems.ObtenirNombreEnsemblesTotems(); i++)
