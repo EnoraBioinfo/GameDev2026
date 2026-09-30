@@ -56,9 +56,6 @@ public class UIDebugJoueur : MonoBehaviour
 
         if (gestionnaireProgression.Progression == null || gestionnaireJoueur.JoueurEtat == null)
         {
-            Debug.LogError(
-                $"{nameof(UIDebugJoueur)} '{name}' : les gestionnaires de progression ou de joueur ne sont pas initialisés.",
-                this);
             return;
         }
 
@@ -94,7 +91,6 @@ public class UIDebugJoueur : MonoBehaviour
 
         if (gestionnaireCartes.Collection == null)
         {
-            Debug.LogError($"{nameof(UIDebugJoueur)} '{name}' : {nameof(gestionnaireCartes)} n'est pas initialisé.", this);
             return;
         }
 
@@ -156,7 +152,6 @@ public class UIDebugJoueur : MonoBehaviour
 
         if (gestionnaireTotems.GestionnaireEnsemblesTotems == null)
         {
-            Debug.LogError($"{nameof(UIDebugJoueur)} '{name}' : les ensembles de totems ne sont pas initialisés.", this);
             return;
         }
 
