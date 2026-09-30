@@ -14,6 +14,9 @@ public class UIDebugJoueur : MonoBehaviour
     [SerializeField]
     private GestionnaireTotems gestionnaireTotems;
 
+    [SerializeField]
+    private GestionnaireJoueur gestionnaireJoueur;
+
     [Header("Textes")]
     [SerializeField]
     private TMP_Text texteProgression;
@@ -42,12 +45,13 @@ public class UIDebugJoueur : MonoBehaviour
 
     private void ActualiserProgression()
     {
-        if (gestionnaireProgression == null || texteProgression == null)
+        if (gestionnaireProgression == null || texteProgression == null || gestionnaireJoueur == null)
         {
             return;
         }
 
         ProgressionJoueur progression = gestionnaireProgression.Progression;
+        JoueurEtat joueurEtat = gestionnaireJoueur.JoueurEtat;
 
         StringBuilder texte = new StringBuilder();
 
@@ -56,6 +60,12 @@ public class UIDebugJoueur : MonoBehaviour
         texte.AppendLine($"Experience : {progression.Experience}");
         texte.AppendLine($"Pieces : {progression.Pieces}");
         texte.AppendLine($"Diamants : {progression.Diamants}");
+
+        texte.AppendLine("=== JOUEUR ===");
+        texte.AppendLine($"Mouvement : {joueurEtat.PointsMouvementsRestants}");
+        texte.AppendLine($"Segment : {joueurEtat.SegmentsActionsRestants}");
+        texte.AppendLine($"Vie : {joueurEtat.PointsDeVieActuels}");
+
 
         texteProgression.text = texte.ToString();
     }

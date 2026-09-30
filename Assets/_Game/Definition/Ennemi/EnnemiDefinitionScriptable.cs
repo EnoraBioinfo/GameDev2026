@@ -1,11 +1,11 @@
 using UnityEngine;
 
 [CreateAssetMenu(
-    fileName = "JoueurDefinition",
+    fileName = "EnnemiDefinitionScriptable",
     menuName = "Jeu/Joueur/Définition du joueur"
 )]
-public class JoueurDefinition : ScriptableObject
-{
+public class EnnemiDefinitionScriptable
+{ 
     [Header("Déplacement")]
     [Min(0)]
     public int pointsMouvementMaximum = 3;
