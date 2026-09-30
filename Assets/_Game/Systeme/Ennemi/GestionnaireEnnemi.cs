@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GestionnaireEnnemi : MonoBehaviour
 {
     [SerializeField]
-    private EnnemiDefinitionScriptable ennemiDefinitionScriptable;
+    private List<EnnemiAPlacer> ennemiAPlacer = new();
 
     [SerializeField]
     private GrilleVisuel grilleVisuel;
@@ -16,29 +17,33 @@ public class GestionnaireEnnemi : MonoBehaviour
 
     private void Start()
     {
-        GrillePosition positionInitiale = new GrillePosition(0, 3);
-
-        ennemiStatistiques = new EnnemiStatistiques(ennemiDefinitionScriptable, 1);
-        ennemiEtat = new EnnemiEtat(ennemiStatistiques);
-        ennemiSysteme = new EnnemiSysteme(ennemiEtat, positionInitiale);
-
-        bool placementReussi = grilleVisuel.Grille.PlacerOccupant(ennemiSysteme, positionInitiale);
-
-        if (!placementReussi)
-        {
-            Debug.LogError(
-                $"Impossible de placer l'ennemi en {positionInitiale}"
-            );
-
-            return;
-        }
-
-        CreerEnnemiVisuel();
+        CreerEnnemis();
     }
 
-    private void CreerEnnemiVisuel()
+    private void CreerEnnemis()
+    { 
+        foreach(EnnemiAPlacer ennemi in ennemiAPlacer)
+        {
+            ennemiStatistiques = new EnnemiStatistiques(ennemi.ennemiDefinitionScriptable, ennemi.niveau);
+            ennemiEtat = new EnnemiEtat(ennemiStatistiques);
+            ennemiSysteme = new EnnemiSysteme(ennemiEtat, ennemi.position);
+
+            bool placementReussi = grilleVisuel.Grille.PlacerOccupant(ennemiSysteme, ennemi.position);
+
+            if (!placementReussi)
+            {
+                Debug.LogError($"Impossible de placer l'ennemi en {ennemi.position}");
+
+                return;
+            }
+
+            CreerEnnemiVisuel(ennemiSysteme, ennemi.ennemiDefinitionScriptable.prefab);
+        }
+    }
+
+    private void CreerEnnemiVisuel(EnnemiSysteme ennemiSysteme, GameObject prefab)
     {
-        GameObject ennemiObjet = Instantiate(ennemiDefinitionScriptable.prefab);
+        GameObject ennemiObjet = Instantiate(prefab);
 
         ennemiVisuel = ennemiObjet.GetComponent<EnnemiVisuel>();
 

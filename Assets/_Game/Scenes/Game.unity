@@ -578,7 +578,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 576c83e14f01b004fb2f62dc8cc2af22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GestionnaireEnnemi
-  ennemiDefinitionScriptable: {fileID: 11400000, guid: 638eab2d44fe6d747991f4270230dd05, type: 2}
+  ennemiAPlacer:
+  - ennemiDefinitionScriptable: {fileID: 11400000, guid: 638eab2d44fe6d747991f4270230dd05, type: 2}
+    niveau: 1
+    position:
+      x: 1
+      y: 3
+  - ennemiDefinitionScriptable: {fileID: 11400000, guid: 3bd71fca439e5924abf65bfe4337f473, type: 2}
+    niveau: 1
+    position:
+      x: 6
+      y: 2
   grilleVisuel: {fileID: 1061427901}
 --- !u!4 &522162630
 Transform:
