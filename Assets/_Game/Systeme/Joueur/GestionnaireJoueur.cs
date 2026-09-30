@@ -9,20 +9,22 @@ public class GestionnaireJoueur : MonoBehaviour
     private GrilleVisuel grilleVisuel;
 
     [SerializeField]
-    private JoueurDefinition joueurDefinition;
+    private JoueurDefinitionScriptable joueurDefinitionScriptable;
 
+    private JoueurStatistiques joueurStatistiques;
+    private JoueurEtat joueurEtat;
+    public JoueurEtat JoueurEtat => joueurEtat;
     private JoueurSysteme joueurSysteme;
     private JoueurVisuel joueurVisuel;
     private SegmentActionJoueur segmentActionActuel;
-    private int nombreSegmentsUtilises;
-
-    public int NombreSegmentsAction => joueurDefinition.nombreSegmentsAction;
 
     public void Initialiser()
     {
         GrillePosition positionInitiale = new GrillePosition(0, 0);
 
-        joueurSysteme = new JoueurSysteme(grilleVisuel.Grille, joueurDefinition, positionInitiale);
+        joueurStatistiques = new JoueurStatistiques(joueurDefinitionScriptable);
+        joueurEtat = new JoueurEtat(joueurStatistiques);
+        joueurSysteme = new JoueurSysteme(grilleVisuel.Grille, joueurEtat, positionInitiale);
 
         grilleVisuel.Grille.PlacerOccupant(joueurSysteme, positionInitiale);
 
@@ -33,22 +35,20 @@ public class GestionnaireJoueur : MonoBehaviour
     {
         GameObject joueurObjet = Instantiate(joueurPrefab);
 
-        joueurVisuel =
-            joueurObjet.GetComponent<JoueurVisuel>();
+        joueurVisuel = joueurObjet.GetComponent<JoueurVisuel>();
 
         joueurVisuel.Initialiser(joueurSysteme);
     }
 
     public void CommencerTour()
     {
-        nombreSegmentsUtilises = 0;
+        joueurEtat.RestaurerSegmentsActions();
+        joueurEtat.RestaurerPointsDeMouvements();
         segmentActionActuel = null;
     }
 
     public void DeplacerVers(GrillePosition position)
     {
-        Debug.Log($"Peut déplacer : {PeutFaireAction(TypeActionJoueur.Deplacement)}");
-
         if (!PeutFaireAction(TypeActionJoueur.Deplacement))
         {
             return;
@@ -63,14 +63,11 @@ public class GestionnaireJoueur : MonoBehaviour
         }
 
         joueurVisuel.ActualiserPosition();
-        Debug.Log($"Déplacement réussi. PM restants : {joueurSysteme.PointsMouvement}");
     }
 
     public void RestaurerPointsMouvement()
     {
         joueurSysteme.RestaurerPointsMouvement();
-
-        Debug.Log($"Points de mouvement restaurés : {joueurSysteme.PointsMouvement}");
     }
 
     public bool PeutCommencerUnSegment()
@@ -80,7 +77,7 @@ public class GestionnaireJoueur : MonoBehaviour
             return false;
         }
 
-        return nombreSegmentsUtilises < NombreSegmentsAction;
+        return joueurEtat.SegmentsActionsRestants > 0;
     }
 
     public bool CommencerSegment(TypeActionJoueur typeAction)
@@ -90,18 +87,16 @@ public class GestionnaireJoueur : MonoBehaviour
             return false;
         }
 
-        nombreSegmentsUtilises++;
+        joueurEtat.UtiliserSegmentAction();
         segmentActionActuel = new SegmentActionJoueur(typeAction);
 
-        Debug.Log($"Segment {nombreSegmentsUtilises} commencé : {typeAction}");
+        Debug.Log($"Segment commencé : {typeAction}");
 
         return true;
     }
 
     public void TerminerSegment()
     {
-        Debug.Log($"Segment {nombreSegmentsUtilises} terminé");
-
         segmentActionActuel = null;
     }
 
@@ -117,6 +112,12 @@ public class GestionnaireJoueur : MonoBehaviour
 
     public bool PossedeEncoreUnSegment()
     {
-        return nombreSegmentsUtilises < NombreSegmentsAction;
+        return joueurEtat.SegmentsActionsRestants > 0;
+    }
+
+    public void RecalculerStatistiques()
+    {
+        joueurStatistiques.Recalculer();
+        joueurEtat.AdapterAuxStatistiquesMaximum();
     }
 }

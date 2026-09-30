@@ -3,18 +3,15 @@ using UnityEngine;
 public class JoueurSysteme : IGrilleOccupant
 {
     private readonly GrilleSysteme grille;
+    private readonly JoueurEtat joueurEtat;
     public GrillePosition Position { get; private set; }
+    public JoueurEtat JoueurEtat => joueurEtat;
 
-    private readonly JoueurDefinition joueurDefinition;
-
-    public int PointsMouvement { get; private set; }
-
-    public JoueurSysteme(GrilleSysteme grille, JoueurDefinition joueurDefinition, GrillePosition positionInitiale)
+    public JoueurSysteme(GrilleSysteme grille, JoueurEtat joueurEtat, GrillePosition positionInitiale)
     {
         this.grille = grille;
-        this.joueurDefinition = joueurDefinition;
+        this.joueurEtat = joueurEtat;
         Position = positionInitiale;
-        PointsMouvement = joueurDefinition.pointsMouvementMaximum;
     }
 
     public void DefinirPosition(GrillePosition position)
@@ -39,17 +36,17 @@ public class JoueurSysteme : IGrilleOccupant
             return false;
         }
 
+        if(joueurEtat.PointsMouvementsRestants <= 0)
+        {
+            return false;
+        }
+
         return true;
     }
 
     public bool SeDeplacerVers(GrillePosition nouvellePosition)
     {
         if (!PeutSeDeplacerVers(nouvellePosition))
-        {
-            return false;
-        }
-
-        if (PointsMouvement <= 0)
         {
             return false;
         }
@@ -61,13 +58,13 @@ public class JoueurSysteme : IGrilleOccupant
             return false;
         }
 
-        PointsMouvement--;
+        joueurEtat.UtiliserPointMouvement();
 
         return true;
     }
 
     public void RestaurerPointsMouvement()
     {
-        PointsMouvement = joueurDefinition.pointsMouvementMaximum;
+        joueurEtat.RestaurerPointsDeMouvements();
     }
 }
