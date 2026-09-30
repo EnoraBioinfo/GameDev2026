@@ -13,9 +13,24 @@ public class SelectionGrille : MonoBehaviour
     private GestionnaireTours gestionnaireTours;
 
     private GrilleCelluleVisuel celluleSelectionnee;
+    private bool referencesValides;
+
+    private void Awake()
+    {
+        referencesValides = ValidationReferencesUnity.Verifier(
+            this,
+            (nameof(cameraPrincipale), cameraPrincipale),
+            (nameof(gestionnaireJoueur), gestionnaireJoueur),
+            (nameof(gestionnaireTours), gestionnaireTours));
+    }
 
     private void Update()
     {
+        if (!referencesValides)
+        {
+            return;
+        }
+
         if (Mouse.current != null &&
             Mouse.current.leftButton.wasPressedThisFrame)
         {

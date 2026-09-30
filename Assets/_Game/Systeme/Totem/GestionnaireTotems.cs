@@ -21,6 +21,14 @@ public class GestionnaireTotems : MonoBehaviour
 
     public void Initialiser()
     {
+        if (!ValidationReferencesUnity.Verifier(
+                this,
+                (nameof(reglesEnsembleTotem), reglesEnsembleTotem),
+                (nameof(gestionnaireProgression), gestionnaireProgression)))
+        {
+            return;
+        }
+
         collection = new CollectionTotems();
         gestionnaireEnsemblesTotems = new GestionnaireEnsemblesTotems(reglesEnsembleTotem, nombreEnsemblesTotems);
     }

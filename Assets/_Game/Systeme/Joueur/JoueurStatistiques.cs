@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class JoueurStatistiques : MonoBehaviour
+public class JoueurStatistiques
 {
     private readonly JoueurDefinitionScriptable joueurDefinition;
     public int PointsDeVieMaximum { get; private set; }

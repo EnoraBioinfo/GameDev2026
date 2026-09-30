@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 
 public class GestionnaireTours : MonoBehaviour
 {
-
     public enum TypeTour
     {
         Joueur,
@@ -17,26 +16,28 @@ public class GestionnaireTours : MonoBehaviour
 
     private void Start()
     {
+        if (!ValidationReferencesUnity.Verifier(this, (nameof(gestionnaireJoueur), gestionnaireJoueur)))
+        {
+            return;
+        }
+
         gestionnaireJoueur.Initialiser();
         CommencerTourJoueur();
     }
 
     private void Update()
     {
-        if (Keyboard.current != null &&
-            Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             TerminerSegmentJoueur();
         }
 
-        if (Keyboard.current != null &&
-            Keyboard.current.dKey.wasPressedThisFrame)
+        if (Keyboard.current != null && Keyboard.current.dKey.wasPressedThisFrame)
         {
             ChoisirActionJoueur(TypeActionJoueur.Deplacement);
         }
 
-        if (Keyboard.current != null &&
-            Keyboard.current.cKey.wasPressedThisFrame)
+        if (Keyboard.current != null && Keyboard.current.cKey.wasPressedThisFrame)
         {
             ChoisirActionJoueur(TypeActionJoueur.Cartes);
         }

@@ -17,7 +17,7 @@ public class GrilleCelluleVisuel : MonoBehaviour
     {
         Position = position;
 
-        if (rendu != null)
+        if (ValidationReferencesUnity.Verifier(this, (nameof(rendu), rendu)))
         {
             materiaux = rendu.materials;
             couleursOriginales = new Color[materiaux.Length];
