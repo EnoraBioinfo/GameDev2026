@@ -1,0 +1,8 @@
+{
+  "name": "com.eega2160.gamedev2026.tests",
+  "version": "1.0.0",
+  "displayName": "GameDev2026 Tests",
+  "description": "Tests automatisés EditMode du projet GameDev2026.",
+  "unity": "6000.0",
+  "dependencies": {}
+}
