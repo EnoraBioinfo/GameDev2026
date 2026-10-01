@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(
@@ -13,6 +14,10 @@ public class NiveauDefinitionScriptable : ScriptableObject
     [Header("Grille")]
     public GrilleDefinition grilleDefinition;
 
-    [Header("Grille")]
-    public int seed = 0;
+    [Header("Zone de spawn")]
+    public RectInt zoneDepartJoueur = new RectInt(0, 0, 2, 2);
+    public RectInt zoneSortie = new RectInt(7, 7, 2, 2);
+
+    [SerializeField]
+    public List<EnnemiAPlacer> ennemiAPlacer = new();
 }

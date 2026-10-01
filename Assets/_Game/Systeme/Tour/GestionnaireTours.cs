@@ -14,14 +14,25 @@ public class GestionnaireTours : MonoBehaviour
     [SerializeField]
     private GestionnaireJoueur gestionnaireJoueur;
 
+    [SerializeField]
+    private GestionnaireEnnemi gestionnaireEnnemi;
+
+    [SerializeField]
+    private GestionnaireNiveau gestionnaireNiveau;
+    [SerializeField]
+    private GrilleVisuel grilleVisuel;
+
     private void Start()
     {
-        if (!ValidationReferencesUnity.Verifier(this, (nameof(gestionnaireJoueur), gestionnaireJoueur)))
+        if (!ValidationReferencesUnity.Verifier(this, (nameof(gestionnaireJoueur), gestionnaireJoueur), (nameof(gestionnaireNiveau), gestionnaireNiveau)))
         {
             return;
         }
 
+        gestionnaireNiveau.Initialiser();
+        grilleVisuel.Initialiser();
         gestionnaireJoueur.Initialiser();
+        gestionnaireEnnemi.Initialiser();
         CommencerTourJoueur();
     }
 

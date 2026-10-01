@@ -3,7 +3,7 @@ using UnityEngine;
 public class GrilleVisuel : MonoBehaviour
 {
     [SerializeField]
-    private GrilleDefinition definition;
+    private GestionnaireNiveau gestionnaireNiveau;
 
     [SerializeField]
     private GameObject cellulePrefab;
@@ -15,22 +15,23 @@ public class GrilleVisuel : MonoBehaviour
 
     public GrilleSysteme Grille => grille;
 
-    private void Awake()
+    public void Initialiser()
     {
         if (!ValidationReferencesUnity.Verifier(
                 this,
-                (nameof(definition), definition),
+                (nameof(gestionnaireNiveau), gestionnaireNiveau),
                 (nameof(cellulePrefab), cellulePrefab)))
         {
             return;
         }
 
+        GrilleDefinition definition = gestionnaireNiveau.NiveauSysteme.GrilleDefinition;
         this.grille = new GrilleSysteme(definition);
 
-        CreerVisuelGrille();
+        CreerVisuelGrille(definition);
     }
 
-    private void CreerVisuelGrille()
+    private void CreerVisuelGrille(GrilleDefinition definition)
     {
         for (int x = 0; x < definition.hauteur; x++)
         {
@@ -38,7 +39,7 @@ public class GrilleVisuel : MonoBehaviour
             {
                 GrillePosition position = new GrillePosition(x, y);
 
-                Vector3 positionMonde = GrilleVersMonde(position);
+                Vector3 positionMonde = GrilleVersMonde(position, definition);
 
                 GameObject cellule = Instantiate(
                     cellulePrefab,
@@ -64,7 +65,7 @@ public class GrilleVisuel : MonoBehaviour
         }
     }
 
-    private Vector3 GrilleVersMonde(GrillePosition position)
+    private Vector3 GrilleVersMonde(GrillePosition position, GrilleDefinition definition)
     {
         return new Vector3(
             position.x * definition.tailleCelluleGrille,
@@ -109,7 +110,9 @@ public class GrilleVisuel : MonoBehaviour
             return;
         }
 
-        Vector3 positionMonde = GrilleVersMonde(position);
+
+        GrilleDefinition definition = gestionnaireNiveau.NiveauSysteme.GrilleDefinition;
+        Vector3 positionMonde = GrilleVersMonde(position, definition);
 
         positionMonde.y = 0.5f;
 

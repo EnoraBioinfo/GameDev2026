@@ -6,6 +6,9 @@ public class GestionnaireJoueur : MonoBehaviour
     private GameObject joueurPrefab;
 
     [SerializeField]
+    private GestionnaireNiveau gestionnaireNiveau;
+
+    [SerializeField]
     private GrilleVisuel grilleVisuel;
 
     [SerializeField]
@@ -20,7 +23,7 @@ public class GestionnaireJoueur : MonoBehaviour
 
     public void Initialiser()
     {
-        GrillePosition positionInitiale = new GrillePosition(0, 0);
+        GrillePosition positionInitiale = gestionnaireNiveau.NiveauSysteme.ObtenirPositionDepartJoueur();
 
         joueurStatistiques = new JoueurStatistiques(joueurDefinitionScriptable);
         joueurEtat = new JoueurEtat(joueurStatistiques);

@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GestionnaireJoueur
   joueurPrefab: {fileID: 4574164417752657849, guid: 1f2ee8bc4af27be4885eb90c269b4868, type: 3}
+  gestionnaireNiveau: {fileID: 1705497135}
   grilleVisuel: {fileID: 1061427901}
   joueurDefinitionScriptable: {fileID: 11400000, guid: 0ce53f4200064b74d95b230f10b86656, type: 2}
 --- !u!4 &57926274
@@ -578,18 +579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 576c83e14f01b004fb2f62dc8cc2af22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GestionnaireEnnemi
-  ennemiAPlacer:
-  - ennemiDefinitionScriptable: {fileID: 11400000, guid: 638eab2d44fe6d747991f4270230dd05, type: 2}
-    niveau: 1
-    position:
-      x: 1
-      y: 3
-  - ennemiDefinitionScriptable: {fileID: 11400000, guid: 3bd71fca439e5924abf65bfe4337f473, type: 2}
-    niveau: 30
-    position:
-      x: 6
-      y: 2
   grilleVisuel: {fileID: 1061427901}
+  gestionnaireNiveau: {fileID: 1705497135}
 --- !u!4 &522162630
 Transform:
   m_ObjectHideFlags: 0
@@ -1023,6 +1014,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GestionnaireTours
   gestionnaireJoueur: {fileID: 57926273}
+  gestionnaireEnnemi: {fileID: 522162629}
+  gestionnaireNiveau: {fileID: 1705497135}
+  grilleVisuel: {fileID: 1061427901}
 --- !u!4 &782949436
 Transform:
   m_ObjectHideFlags: 0
@@ -1343,7 +1337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c3b98f3c45ebd4c8f56c36561aac8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrilleVisuel
-  definition: {fileID: 11400000, guid: d702fbb6105d62f49bdbbcd73cb3f800, type: 2}
+  gestionnaireNiveau: {fileID: 0}
   cellulePrefab: {fileID: 5004354034245895784, guid: 9e0c4d5af194b714eb6669d76b771855, type: 3}
   obstaclePrefab: {fileID: 4555461695177849309, guid: a5f4a7b82c9bf22439d998ce13b49dad, type: 3}
 --- !u!4 &1061427902
@@ -2292,6 +2286,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1486229682}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1705497133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1705497134}
+  - component: {fileID: 1705497135}
+  m_Layer: 0
+  m_Name: GestionnaireNiveau
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1705497134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705497133}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1923198268}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1705497135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705497133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 106b3a1d68aad9c4eb7366be0e679149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Runtime::GestionnaireNiveau
+  niveauDefinitionScriptable:
+  - {fileID: 11400000, guid: 75b96859edb609e4a9553da6114bbd81, type: 2}
+  - {fileID: 11400000, guid: 331b7dbe0f7b4dd4f852561392eca883, type: 2}
+  utiliserSeedFournie: 0
+  seedFournie: 0
 --- !u!1 &1739937600
 GameObject:
   m_ObjectHideFlags: 0
@@ -2454,6 +2497,7 @@ Transform:
   - {fileID: 1061427902}
   - {fileID: 1830000672}
   - {fileID: 972406146}
+  - {fileID: 1705497134}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1924271823

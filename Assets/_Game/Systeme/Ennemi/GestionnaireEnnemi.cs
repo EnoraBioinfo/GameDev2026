@@ -4,46 +4,45 @@ using UnityEngine;
 public class GestionnaireEnnemi : MonoBehaviour
 {
     [SerializeField]
-    private List<EnnemiAPlacer> ennemiAPlacer = new();
-
-    [SerializeField]
     private GrilleVisuel grilleVisuel;
 
-    private EnnemiEtat ennemiEtat;
-    private EnnemiStatistiques ennemiStatistiques;
-    private EnnemiSysteme ennemiSysteme;
+    [SerializeField]
+    private GestionnaireNiveau gestionnaireNiveau;
 
-    private EnnemiVisuel ennemiVisuel;
     private List<EnnemiSysteme> ennemis = new();
     public IReadOnlyList<EnnemiSysteme> Ennemis => ennemis;
 
-    private void Start()
+    public void Initialiser()
     {
         CreerEnnemis();
     }
 
     private void CreerEnnemis()
     { 
-        foreach(EnnemiAPlacer ennemi in ennemiAPlacer)
+        foreach(EnnemiAPlacer ennemi in gestionnaireNiveau.NiveauSysteme.EnnemisAPlacer)
         {
-            ennemiStatistiques = new EnnemiStatistiques(ennemi.ennemiDefinitionScriptable, ennemi.niveau);
-            ennemiEtat = new EnnemiEtat(ennemiStatistiques);
-            ennemiSysteme = new EnnemiSysteme(ennemiEtat, ennemi.position);
-
-            bool placementReussi = grilleVisuel.Grille.PlacerOccupant(ennemiSysteme, ennemi.position);
-
-            if (!placementReussi)
+            for (int i = 0; i < ennemi.nombreAPlacer; i++)
             {
-                Debug.LogError($"Impossible de placer l'ennemi en {ennemi.position}");
+                EnnemiStatistiques ennemiStatistiques = new EnnemiStatistiques(ennemi.ennemiDefinitionScriptable, ennemi.niveau);
+                EnnemiEtat ennemiEtat = new EnnemiEtat(ennemiStatistiques);
+                GrillePosition positionEnnemi = gestionnaireNiveau.NiveauSysteme.ObtenirPositionDepartEnnemi();
+                EnnemiSysteme ennemiSysteme = new EnnemiSysteme(ennemiEtat, positionEnnemi);
 
-                return;
-            }
+                bool placementReussi = grilleVisuel.Grille.PlacerOccupant(ennemiSysteme, positionEnnemi);
 
-            if(!CreerEnnemiVisuel(ennemiSysteme, ennemi.ennemiDefinitionScriptable.prefab))
-            { 
-                continue;
+                if (!placementReussi)
+                {
+                    Debug.LogError($"Impossible de placer l'ennemi en {positionEnnemi}");
+
+                    continue;
+                }
+
+                if (!CreerEnnemiVisuel(ennemiSysteme, ennemi.ennemiDefinitionScriptable.prefab))
+                {
+                    continue;
+                }
+                ennemis.Add(ennemiSysteme);
             }
-            ennemis.Add(ennemiSysteme);
         }
     }
 
@@ -51,7 +50,7 @@ public class GestionnaireEnnemi : MonoBehaviour
     {
         GameObject ennemiObjet = Instantiate(prefab);
 
-        ennemiVisuel = ennemiObjet.GetComponent<EnnemiVisuel>();
+        EnnemiVisuel ennemiVisuel = ennemiObjet.GetComponent<EnnemiVisuel>();
 
         if (ennemiVisuel == null)
         {
