@@ -14,6 +14,8 @@ public class GestionnaireEnnemi : MonoBehaviour
     private EnnemiSysteme ennemiSysteme;
 
     private EnnemiVisuel ennemiVisuel;
+    private List<EnnemiSysteme> ennemis = new();
+    public IReadOnlyList<EnnemiSysteme> Ennemis => ennemis;
 
     private void Start()
     {
@@ -37,16 +39,28 @@ public class GestionnaireEnnemi : MonoBehaviour
                 return;
             }
 
-            CreerEnnemiVisuel(ennemiSysteme, ennemi.ennemiDefinitionScriptable.prefab);
+            if(!CreerEnnemiVisuel(ennemiSysteme, ennemi.ennemiDefinitionScriptable.prefab))
+            { 
+                continue;
+            }
+            ennemis.Add(ennemiSysteme);
         }
     }
 
-    private void CreerEnnemiVisuel(EnnemiSysteme ennemiSysteme, GameObject prefab)
+    private bool CreerEnnemiVisuel(EnnemiSysteme ennemiSysteme, GameObject prefab)
     {
         GameObject ennemiObjet = Instantiate(prefab);
 
         ennemiVisuel = ennemiObjet.GetComponent<EnnemiVisuel>();
 
+        if (ennemiVisuel == null)
+        {
+            Destroy(ennemiObjet);
+            return false;
+        }
+
         ennemiVisuel.Initialiser(ennemiSysteme);
+
+        return true;
     }
 }
