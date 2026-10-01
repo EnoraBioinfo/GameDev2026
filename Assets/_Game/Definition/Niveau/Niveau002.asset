@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f700466a66394e447a85dc0fd046f87d, type: 3}
+  m_Name: Niveau002
+  m_EditorClassIdentifier: Game.Runtime::NiveauDefinitionScriptable
+  numeroNiveau: 2
+  grilleDefinition: {fileID: 11400000, guid: 662c8a84d3d6af94694004a1a2235faa, type: 2}
+  zoneDepartJoueur:
+    x: 0
+    y: 0
+    width: 2
+    height: 2
+  zoneSortie:
+    x: 3
+    y: 3
+    width: 2
+    height: 2
+  ennemiAPlacer:
+  - ennemiDefinitionScriptable: {fileID: 11400000, guid: 638eab2d44fe6d747991f4270230dd05, type: 2}
+    niveau: 1
+    nombreAPlacer: 1
+  - ennemiDefinitionScriptable: {fileID: 11400000, guid: 638eab2d44fe6d747991f4270230dd05, type: 2}
+    niveau: 3
+    nombreAPlacer: 1
+  - ennemiDefinitionScriptable: {fileID: 11400000, guid: 3bd71fca439e5924abf65bfe4337f473, type: 2}
+    niveau: 1
+    nombreAPlacer: 1
+  decorations:
+  - {fileID: 5979986574564509197, guid: 6b2daf59219762448aa70418547e3477, type: 3}
+  - {fileID: 8670281450005282059, guid: cf78d0b2cbb10cd4e813d45d53465b3c, type: 3}
+  obstaclesAPlacer:
+  - obstacleGameObject: {fileID: 4555461695177849309, guid: a5f4a7b82c9bf22439d998ce13b49dad, type: 3}
+    nombreAPlacer: 2

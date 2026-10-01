@@ -20,6 +20,9 @@ public class EnnemiDefinitionScriptable : ScriptableObject
     [Min(1)]
     public int pointsDeVieMaximum = 10;
 
+    [Min(0)]
+    public int protection = 10;
+
     [Min(1)]
     public int nombreActions = 1;
 

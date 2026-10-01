@@ -4,49 +4,72 @@ using UnityEngine;
 public class GestionnaireEnnemi : MonoBehaviour
 {
     [SerializeField]
-    private List<EnnemiAPlacer> ennemiAPlacer = new();
-
-    [SerializeField]
     private GrilleVisuel grilleVisuel;
 
-    private EnnemiEtat ennemiEtat;
-    private EnnemiStatistiques ennemiStatistiques;
-    private EnnemiSysteme ennemiSysteme;
+    [SerializeField]
+    private GestionnaireNiveau gestionnaireNiveau;
 
-    private EnnemiVisuel ennemiVisuel;
+    private List<EnnemiSysteme> ennemis = new();
+    public IReadOnlyList<EnnemiSysteme> Ennemis => ennemis;
 
-    private void Start()
+    public void Initialiser()
     {
         CreerEnnemis();
     }
 
     private void CreerEnnemis()
     { 
-        foreach(EnnemiAPlacer ennemi in ennemiAPlacer)
+        foreach(EnnemiAPlacer ennemi in gestionnaireNiveau.NiveauSysteme.EnnemisAPlacer)
         {
-            ennemiStatistiques = new EnnemiStatistiques(ennemi.ennemiDefinitionScriptable, ennemi.niveau);
-            ennemiEtat = new EnnemiEtat(ennemiStatistiques);
-            ennemiSysteme = new EnnemiSysteme(ennemiEtat, ennemi.position);
-
-            bool placementReussi = grilleVisuel.Grille.PlacerOccupant(ennemiSysteme, ennemi.position);
-
-            if (!placementReussi)
+            for (int i = 0; i < ennemi.nombreAPlacer; i++)
             {
-                Debug.LogError($"Impossible de placer l'ennemi en {ennemi.position}");
+                EnnemiStatistiques ennemiStatistiques = new EnnemiStatistiques(ennemi.ennemiDefinitionScriptable, ennemi.niveau);
+                EnnemiEtat ennemiEtat = new EnnemiEtat(ennemiStatistiques);
 
-                return;
+                bool positionTrouvee = gestionnaireNiveau.NiveauSysteme.EssayerObtenirPositionLibre(
+                    grilleVisuel.Grille,
+                    out GrillePosition positionEnnemi);
+
+                if (!positionTrouvee)
+                {
+                    Debug.LogWarning("Impossible de trouver une cellule libre pour l'ennemi.");
+                    continue;
+                }
+
+                EnnemiSysteme ennemiSysteme = new EnnemiSysteme(ennemiEtat, positionEnnemi);
+
+                bool placementReussi = grilleVisuel.Grille.PlacerOccupant(ennemiSysteme, positionEnnemi);
+
+                if (!placementReussi)
+                {
+                    Debug.LogError($"Impossible de placer l'ennemi en {positionEnnemi}");
+
+                    continue;
+                }
+
+                if (!CreerEnnemiVisuel(ennemiSysteme, ennemi.ennemiDefinitionScriptable.prefab))
+                {
+                    continue;
+                }
+                ennemis.Add(ennemiSysteme);
             }
-
-            CreerEnnemiVisuel(ennemiSysteme, ennemi.ennemiDefinitionScriptable.prefab);
         }
     }
 
-    private void CreerEnnemiVisuel(EnnemiSysteme ennemiSysteme, GameObject prefab)
+    private bool CreerEnnemiVisuel(EnnemiSysteme ennemiSysteme, GameObject prefab)
     {
         GameObject ennemiObjet = Instantiate(prefab);
 
-        ennemiVisuel = ennemiObjet.GetComponent<EnnemiVisuel>();
+        EnnemiVisuel ennemiVisuel = ennemiObjet.GetComponent<EnnemiVisuel>();
+
+        if (ennemiVisuel == null)
+        {
+            Destroy(ennemiObjet);
+            return false;
+        }
 
         ennemiVisuel.Initialiser(ennemiSysteme);
+
+        return true;
     }
 }

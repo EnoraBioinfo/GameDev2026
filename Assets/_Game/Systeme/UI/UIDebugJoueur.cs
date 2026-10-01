@@ -16,6 +16,8 @@ public class UIDebugJoueur : MonoBehaviour
 
     [SerializeField]
     private GestionnaireJoueur gestionnaireJoueur;
+    [SerializeField]
+    private GestionnaireEnnemi gestionnaireEnnemi;
 
     [Header("Textes")]
     [SerializeField]
@@ -30,6 +32,9 @@ public class UIDebugJoueur : MonoBehaviour
     [SerializeField]
     private TMP_Text texteEnsemblesTotems;
 
+    [SerializeField]
+    private TMP_Text texteEnnemis;
+
     private void Start()
     {
         Actualiser();
@@ -41,6 +46,7 @@ public class UIDebugJoueur : MonoBehaviour
         ActualiserCartes();
         ActualiserTotems();
         ActualiserEnsemblesTotems();
+        ActualiserEnnemis();
     }
 
     private void ActualiserProgression()
@@ -56,9 +62,6 @@ public class UIDebugJoueur : MonoBehaviour
 
         if (gestionnaireProgression.Progression == null || gestionnaireJoueur.JoueurEtat == null)
         {
-            Debug.LogError(
-                $"{nameof(UIDebugJoueur)} '{name}' : les gestionnaires de progression ou de joueur ne sont pas initialisés.",
-                this);
             return;
         }
 
@@ -94,7 +97,6 @@ public class UIDebugJoueur : MonoBehaviour
 
         if (gestionnaireCartes.Collection == null)
         {
-            Debug.LogError($"{nameof(UIDebugJoueur)} '{name}' : {nameof(gestionnaireCartes)} n'est pas initialisé.", this);
             return;
         }
 
@@ -156,7 +158,6 @@ public class UIDebugJoueur : MonoBehaviour
 
         if (gestionnaireTotems.GestionnaireEnsemblesTotems == null)
         {
-            Debug.LogError($"{nameof(UIDebugJoueur)} '{name}' : les ensembles de totems ne sont pas initialisés.", this);
             return;
         }
 
@@ -185,5 +186,37 @@ public class UIDebugJoueur : MonoBehaviour
         texte.AppendLine($"Ensemble selectionne : {gestionnaireTotems.GestionnaireEnsemblesTotems.IndexEnsembleTotemSelectionne}");
 
         texteEnsemblesTotems.text = texte.ToString();
+    }
+
+    private void ActualiserEnnemis()
+    {
+        if (!ValidationReferencesUnity.Verifier(
+                this,
+                (nameof(gestionnaireEnnemi), gestionnaireEnnemi),
+                (nameof(texteEnnemis), texteEnnemis)))
+        {
+            return;
+        }
+
+        if (gestionnaireEnnemi.Ennemis == null)
+        {
+            return;
+        }
+
+        StringBuilder texte = new StringBuilder();
+        texte.AppendLine("=== ENNEMIS ===");
+
+         foreach (EnnemiSysteme ennemi in gestionnaireEnnemi.Ennemis)
+         {
+            EnnemiStatistiques ennemiStats = ennemi.EnnemiEtat.EnnemiStatistiques;
+            texte.AppendLine($"--- {ennemiStats.Nom} ---");
+            texte.AppendLine($"- Niveau : {ennemiStats.Niveau}");
+            texte.AppendLine($"- Vie : {ennemiStats.PointsDeVieMaximum}");
+            texte.AppendLine($"- Actions : {ennemiStats.NombreActions}");
+            texte.AppendLine($"- Or : {ennemiStats.RecompenseOr}");
+            texte.AppendLine();
+         }
+
+        texteEnnemis.text = texte.ToString();
     }
 }

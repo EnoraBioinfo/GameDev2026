@@ -137,4 +137,23 @@ public class GrilleSysteme
 
         return true;
     }
+
+    public bool PlacerObstacle(IGrilleOccupant obstacle, GrillePosition position)
+    {
+        GrilleCellule cellule = ObtenirCellule(position);
+
+        if (cellule == null)
+        {
+            return false;
+        }
+
+        if (!cellule.PlacerObstacle(obstacle))
+        {
+            return false;
+        }
+
+        obstacle.DefinirPosition(position);
+
+        return true;
+    }
 }
