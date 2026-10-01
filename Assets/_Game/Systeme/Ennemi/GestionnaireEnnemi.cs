@@ -9,6 +9,9 @@ public class GestionnaireEnnemi : MonoBehaviour
     [SerializeField]
     private GestionnaireNiveau gestionnaireNiveau;
 
+    [SerializeField]
+    private GestionnaireJoueur gestionnaireJoueur;
+
     private List<EnnemiSysteme> ennemis = new();
     public IReadOnlyList<EnnemiSysteme> Ennemis => ennemis;
 
@@ -69,6 +72,7 @@ public class GestionnaireEnnemi : MonoBehaviour
         }
 
         ennemiVisuel.Initialiser(ennemiSysteme);
+        ennemiVisuel.OrienterVers(gestionnaireJoueur.Position);
 
         return true;
     }

@@ -7,7 +7,7 @@ public class NiveauSysteme
 
     private readonly NiveauDefinitionScriptable niveauDefinitionScriptable;
     private readonly System.Random random;
-    private readonly int prevalenceDesDecorations = 5;
+    private readonly int prevalenceDesDecorations = 9;
 
     public int NumeroNiveau => niveauDefinitionScriptable.numeroNiveau;
     public int Hauteur => niveauDefinitionScriptable.grilleDefinition.hauteur;

@@ -119,9 +119,7 @@ public class GrilleVisuel : MonoBehaviour
                     continue;
                 }
 
-                bool positionTrouvee = gestionnaireNiveau.NiveauSysteme.EssayerObtenirPositionLibre(
-                    grille,
-                    out GrillePosition position);
+                bool positionTrouvee = gestionnaireNiveau.NiveauSysteme.EssayerObtenirPositionLibre(grille, out GrillePosition position);
 
                 if (!positionTrouvee)
                 {
@@ -146,12 +144,12 @@ public class GrilleVisuel : MonoBehaviour
         GrilleDefinition definition = gestionnaireNiveau.NiveauSysteme.GrilleDefinition;
         Vector3 positionMonde = GrilleVersMonde(position, definition);
 
-        positionMonde.y = 0.1f;
+        float rotationY = gestionnaireNiveau.NiveauSysteme.ObtenirRotationY();
 
         Instantiate(
             prefab,
             positionMonde,
-            Quaternion.identity,
+            Quaternion.Euler(0f, rotationY, 0f),
             transform
         );
     }

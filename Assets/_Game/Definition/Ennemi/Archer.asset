@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnnemiDefinitionScriptable
   nom: Archer
   description: "Un archer tout moche on ne connait m\xEAme pas sa forme"
-  prefab: {fileID: 6732148471514055863, guid: c3ce41d4d85e6d949b8f57a0a30d7199, type: 3}
+  prefab: {fileID: 1721572922351555956, guid: ae3c805234ce06a4eba04c10205e3649, type: 3}
   pointsDeVieMaximum: 5
+  protection: 10
   nombreActions: 3
   recompenseOr: 4
   dropsTotems: []
