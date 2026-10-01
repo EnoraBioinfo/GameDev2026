@@ -20,6 +20,7 @@ public class GestionnaireJoueur : MonoBehaviour
     private JoueurSysteme joueurSysteme;
     private JoueurVisuel joueurVisuel;
     private SegmentActionJoueur segmentActionActuel;
+    public GrillePosition Position => joueurSysteme.Position;
 
     public void Initialiser()
     {

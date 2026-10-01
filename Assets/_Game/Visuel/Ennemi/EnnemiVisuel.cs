@@ -15,7 +15,7 @@ public class EnnemiVisuel : MonoBehaviour
     {
         transform.position = new Vector3(
             ennemiSysteme.Position.x,
-            1f,
+            0f,
             ennemiSysteme.Position.y
         );
     }

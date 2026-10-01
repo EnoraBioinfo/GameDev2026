@@ -15,7 +15,7 @@ public class JoueurVisuel : MonoBehaviour
     {
         transform.position = new Vector3(
             joueurSysteme.Position.x,
-            1f,
+            0f,
             joueurSysteme.Position.y
         );
     }

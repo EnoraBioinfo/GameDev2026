@@ -4,6 +4,9 @@ using UnityEngine;
 public class GestionnaireNiveau : MonoBehaviour
 {
     [SerializeField]
+    private int niveauAGenerer = 1;
+
+    [SerializeField]
     private List<NiveauDefinitionScriptable> niveauDefinitionScriptable = new();
 
     [Header("Seed")]
@@ -20,11 +23,11 @@ public class GestionnaireNiveau : MonoBehaviour
     {
         if (utiliserSeedFournie)
         {
-            niveauSysteme = new NiveauSysteme(ObtenirDefinitionNiveau(2), seedFournie);
+            niveauSysteme = new NiveauSysteme(ObtenirDefinitionNiveau(niveauAGenerer), seedFournie);
             return;
         }
 
-        niveauSysteme = new NiveauSysteme(ObtenirDefinitionNiveau(2));
+        niveauSysteme = new NiveauSysteme(ObtenirDefinitionNiveau(niveauAGenerer));
     }
 
     private NiveauDefinitionScriptable ObtenirDefinitionNiveau(int numeroNiveau)
