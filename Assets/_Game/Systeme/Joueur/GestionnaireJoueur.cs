@@ -23,7 +23,16 @@ public class GestionnaireJoueur : MonoBehaviour
 
     public void Initialiser()
     {
-        GrillePosition positionInitiale = gestionnaireNiveau.NiveauSysteme.ObtenirPositionDepartJoueur();
+        bool positionTrouvee = gestionnaireNiveau.NiveauSysteme.EssayerObtenirPositionLibre(
+            grilleVisuel.Grille,
+            gestionnaireNiveau.NiveauSysteme.ZoneDepartJoueur,
+            out GrillePosition positionInitiale);
+
+        if (!positionTrouvee)
+        {
+            Debug.LogWarning("Impossible de trouver une cellule libre pour le joueur.");
+            return;
+        }
 
         joueurStatistiques = new JoueurStatistiques(joueurDefinitionScriptable);
         joueurEtat = new JoueurEtat(joueurStatistiques);

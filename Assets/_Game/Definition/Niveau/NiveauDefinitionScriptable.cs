@@ -20,4 +20,10 @@ public class NiveauDefinitionScriptable : ScriptableObject
 
     [SerializeField]
     public List<EnnemiAPlacer> ennemiAPlacer = new();
+
+    [SerializeField]
+    public List<GameObject> decorations = new();
+
+    [SerializeField]
+    public List<ObsctaclesAPlacer> obstaclesAPlacer = new();
 }

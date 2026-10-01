@@ -47,4 +47,22 @@ public class GrilleCellule
     {
         Occupant = null;
     }
+
+    public bool PlacerObstacle(IGrilleOccupant obstacle)
+    {
+        if (EstOccupee())
+        {
+            return false;
+        }
+
+        if (!EstTraversable)
+        {
+            return false;
+        }
+
+        Occupant = obstacle;
+        EstTraversable = false;
+
+        return true;
+    }
 }

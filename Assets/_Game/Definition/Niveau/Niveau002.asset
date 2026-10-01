@@ -30,7 +30,13 @@ MonoBehaviour:
     nombreAPlacer: 1
   - ennemiDefinitionScriptable: {fileID: 11400000, guid: 638eab2d44fe6d747991f4270230dd05, type: 2}
     niveau: 3
-    nombreAPlacer: 7
+    nombreAPlacer: 1
   - ennemiDefinitionScriptable: {fileID: 11400000, guid: 3bd71fca439e5924abf65bfe4337f473, type: 2}
     niveau: 1
     nombreAPlacer: 1
+  decorations:
+  - {fileID: 5979986574564509197, guid: 6b2daf59219762448aa70418547e3477, type: 3}
+  - {fileID: 8670281450005282059, guid: cf78d0b2cbb10cd4e813d45d53465b3c, type: 3}
+  obstaclesAPlacer:
+  - obstacleGameObject: {fileID: 4555461695177849309, guid: a5f4a7b82c9bf22439d998ce13b49dad, type: 3}
+    nombreAPlacer: 2

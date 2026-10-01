@@ -25,7 +25,17 @@ public class GestionnaireEnnemi : MonoBehaviour
             {
                 EnnemiStatistiques ennemiStatistiques = new EnnemiStatistiques(ennemi.ennemiDefinitionScriptable, ennemi.niveau);
                 EnnemiEtat ennemiEtat = new EnnemiEtat(ennemiStatistiques);
-                GrillePosition positionEnnemi = gestionnaireNiveau.NiveauSysteme.ObtenirPositionDepartEnnemi();
+
+                bool positionTrouvee = gestionnaireNiveau.NiveauSysteme.EssayerObtenirPositionLibre(
+                    grilleVisuel.Grille,
+                    out GrillePosition positionEnnemi);
+
+                if (!positionTrouvee)
+                {
+                    Debug.LogWarning("Impossible de trouver une cellule libre pour l'ennemi.");
+                    continue;
+                }
+
                 EnnemiSysteme ennemiSysteme = new EnnemiSysteme(ennemiEtat, positionEnnemi);
 
                 bool placementReussi = grilleVisuel.Grille.PlacerOccupant(ennemiSysteme, positionEnnemi);

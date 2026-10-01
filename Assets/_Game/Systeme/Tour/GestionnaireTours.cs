@@ -115,9 +115,6 @@ public class GestionnaireTours : MonoBehaviour
 
         gestionnaireJoueur.TerminerSegment();
 
-        if (!gestionnaireJoueur.PossedeEncoreUnSegment())
-        {
-            TerminerTourJoueur();
-        }
+        TerminerTourJoueur();
     }
 }

@@ -8,9 +8,6 @@ public class GrilleVisuel : MonoBehaviour
     [SerializeField]
     private GameObject cellulePrefab;
 
-    [SerializeField]
-    private GameObject obstaclePrefab;
-
     private GrilleSysteme grille;
 
     public GrilleSysteme Grille => grille;
@@ -29,6 +26,8 @@ public class GrilleVisuel : MonoBehaviour
         this.grille = new GrilleSysteme(definition);
 
         CreerVisuelGrille(definition);
+        CreerObstacles();
+        CreerDecorations(definition);
     }
 
     private void CreerVisuelGrille(GrilleDefinition definition)
@@ -40,6 +39,7 @@ public class GrilleVisuel : MonoBehaviour
                 GrillePosition position = new GrillePosition(x, y);
 
                 Vector3 positionMonde = GrilleVersMonde(position, definition);
+                positionMonde.y = -0.2f;
 
                 GameObject cellule = Instantiate(
                     cellulePrefab,
@@ -65,6 +65,40 @@ public class GrilleVisuel : MonoBehaviour
         }
     }
 
+    private void CreerDecorations(GrilleDefinition grilleDefinition)
+    {
+        for (int x = 0; x < grilleDefinition.hauteur; x++)
+        {
+            for (int y = 0; y < grilleDefinition.largeur; y++)
+            {
+                GameObject decorationPrefab = gestionnaireNiveau.NiveauSysteme.ObtenirDecorationPourCellule();
+                if(decorationPrefab == null)
+                {
+                    continue;
+                }
+
+                GrillePosition position = new GrillePosition(x, y);
+
+                Vector3 positionMonde = GrilleVersMonde(position, grilleDefinition);
+
+                float amplitude = grilleDefinition.tailleCelluleGrille * 0.2f;
+                positionMonde += gestionnaireNiveau.NiveauSysteme.ObtenirVariationDecoration(amplitude);
+
+                float rotationY = gestionnaireNiveau.NiveauSysteme.ObtenirRotationY();
+
+                GameObject decoration = Instantiate(
+                    decorationPrefab,
+                    positionMonde,
+                    Quaternion.Euler(0f, rotationY, 0f),
+                    transform
+                );
+
+                Debug.Log($"Décoration créée en {decoration.transform.position}");
+            }
+        }
+
+    }
+
     private Vector3 GrilleVersMonde(GrillePosition position, GrilleDefinition definition)
     {
         return new Vector3(
@@ -74,50 +108,48 @@ public class GrilleVisuel : MonoBehaviour
         );
     }
 
-    public void AfficherCelluleBloquee(GrillePosition position)
+    private void CreerObstacles()
     {
-        GrilleCelluleVisuel celluleVisuel = TrouverCelluleVisuelle(position);
-
-        if (celluleVisuel == null)
+        foreach (ObsctaclesAPlacer obstacleAPlacer in gestionnaireNiveau.NiveauSysteme.ObsctaclesAPlacer)
         {
-            return;
-        }
-
-        celluleVisuel.DefinirBloquee();
-
-        CreerObstacle(position);
-    }
-
-    private GrilleCelluleVisuel TrouverCelluleVisuelle(GrillePosition position)
-    {
-        GrilleCelluleVisuel[] cellules = GetComponentsInChildren<GrilleCelluleVisuel>();
-
-        foreach (GrilleCelluleVisuel cellule in cellules)
-        {
-            if (cellule.Position == position)
+            for (int i = 0; i < obstacleAPlacer.nombreAPlacer; i++)
             {
-                return cellule;
+                if (obstacleAPlacer.obstacleGameObject == null)
+                {
+                    continue;
+                }
+
+                bool positionTrouvee = gestionnaireNiveau.NiveauSysteme.EssayerObtenirPositionLibre(
+                    grille,
+                    out GrillePosition position);
+
+                if (!positionTrouvee)
+                {
+                    Debug.LogWarning($"Impossible de trouver une cellule libre pour l'obstacle {obstacleAPlacer.obstacleGameObject.name}.");
+                    continue;
+                }
+
+                ObstacleSysteme obstacleSysteme = new ObstacleSysteme();
+
+                if (!grille.PlacerObstacle(obstacleSysteme, position))
+                {
+                    continue;
+                }
+
+                CreerVisuelObstacle(obstacleAPlacer.obstacleGameObject, position);
             }
         }
-
-        return null;
     }
 
-    private void CreerObstacle(GrillePosition position)
+    private void CreerVisuelObstacle(GameObject prefab, GrillePosition position)
     {
-        if (obstaclePrefab == null)
-        {
-            return;
-        }
-
-
         GrilleDefinition definition = gestionnaireNiveau.NiveauSysteme.GrilleDefinition;
         Vector3 positionMonde = GrilleVersMonde(position, definition);
 
-        positionMonde.y = 0.5f;
+        positionMonde.y = 0.1f;
 
         Instantiate(
-            obstaclePrefab,
+            prefab,
             positionMonde,
             Quaternion.identity,
             transform
