@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnnemiEtat
 {
     private readonly EnnemiStatistiques ennemiStatistiques;
+    public EnnemiStatistiques EnnemiStatistiques => ennemiStatistiques;
 
     public int PointsDeVieActuels { get; private set; }
 

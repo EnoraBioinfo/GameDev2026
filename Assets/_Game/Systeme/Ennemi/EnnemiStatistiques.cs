@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnnemiStatistiques
 {
     private readonly EnnemiDefinitionScriptable ennemiDefinitionScriptable;
-
+    public string Nom => ennemiDefinitionScriptable.nom;
     public int Niveau { get; private set; }
     public int PointsDeVieMaximum { get; private set; }
     public int NombreActions { get; private set; }
